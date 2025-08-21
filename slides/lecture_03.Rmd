@@ -1,5 +1,5 @@
 ---
-title: Lab 1 
+title: Activity: Penguin data
 output:
   xaringan::moon_reader:
     css: "lab-slides.css"
@@ -13,20 +13,20 @@ output:
 ## Agenda
 
 .large[
-* Introduction to R Markdown
-* Lab 1
-* HW 1 released on course website, due January 21 at noon on Canvas
-* Extra Credit 1 release on course website, due at the end of the semester
+* MSC pitch
+* Class activity
+* HW 1 released on course website, due next Friday on Canvas
 ]
 
 ---
 
-## Lab 1: Continuing with penguins
+## Activity: Continuing with penguins
 
 .large[
-[https://sta112-s22.github.io/labs/lab1.html](https://sta112-s22.github.io/labs/lab1.html)
+[https://sta112-f25.github.io/class_activities/ca_03.html](https://sta112-f25.github.io/class_activities/ca_03.html)
 
 * Welcome to work in groups
+* Submit on Canvas when done
 * You may leave if done early, or start HW 1 in class
 ]
 
