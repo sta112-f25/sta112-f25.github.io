@@ -16,4 +16,4 @@ August 29
 : Activity -- beginning R
 
 : **HW 1 released**{: .label .label-yellow }
-  : [HW](https://sta112-f25.github.io/homework/homework_1.html)
+  : [HW 1](https://sta112-f25.github.io/homework/hw_1.html)

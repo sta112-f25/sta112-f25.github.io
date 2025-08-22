@@ -63,7 +63,13 @@ Image: NBA.com
 What specific question were the researchers trying to answer?
 ]
 
---
+---
+
+### Research question
+
+.large[
+What specific question were the researchers trying to answer?
+]
 
 .large[
 * Do home teams perform better when they have more fans present?
@@ -77,14 +83,31 @@ What specific question were the researchers trying to answer?
 To answer their research question, the authors gathered data on NBA games. Where did the data come from? Were there any issues with the data?
 ]
 
---
+---
+
+### Data
+
+.large[
+To answer their research question, the authors gathered data on NBA games. Where did the data come from? Were there any issues with the data?
+]
 
 .large[
 * Results and attendances downloaded from [Basketball-Reference.com](https://www.basketball-reference.com/)
 * Attendance data also collected from NBA and local news
 ]
 
---
+---
+
+### Data
+
+.large[
+To answer their research question, the authors gathered data on NBA games. Where did the data come from? Were there any issues with the data?
+]
+
+.large[
+* Results and attendances downloaded from [Basketball-Reference.com](https://www.basketball-reference.com/)
+* Attendance data also collected from NBA and local news
+]
 
 .large[
 .question[
@@ -100,7 +123,13 @@ Issue: reported attendance sometimes inaccurate!
 What statistics and data science tools did the researchers use to come to their conclusions?
 ]
 
---
+---
+
+### Methods
+
+.large[
+What statistics and data science tools did the researchers use to come to their conclusions?
+]
 
 .large[
 * Linear regression model
@@ -116,7 +145,13 @@ What statistics and data science tools did the researchers use to come to their 
 What did the researchers conclude about their research question?
 ]
 
---
+---
+
+### Conclusions
+
+.large[
+What did the researchers conclude about their research question?
+]
 
 .large[
 * An increase of 1,000 home fans is associated with an increase of 1.4 points in the home team's margin of victory, after controlling for other factors
@@ -134,7 +169,15 @@ Could you reproduce their results?
 ]
 ]
 
---
+---
+
+### Reproducibility
+
+.large[
+.question[
+Could you reproduce their results?
+]
+]
 
 .large[
 Possibly, but it would be hard.
