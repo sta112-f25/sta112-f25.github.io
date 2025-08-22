@@ -174,7 +174,13 @@ There will be one project in this course, which you will complete over the cours
 
 ### Exams
 
-We will have two in-class exams (dates TBA), covering simple linear regression and multiple linear regression. There will also be one cumulative final exam.
+We will have two in-class exams, covering simple linear regression and multiple linear regression. There will also be one cumulative final exam.
+
+**Exam 1:** October 10 (tentative), in class
+
+**Exam 2:** November 14 (tentative), in class
+
+**Final exam:** December 8, 9am
 
 
 ## Grading
@@ -194,7 +200,7 @@ I will use the standard grading scale (above a 93 is an A, above a 90 is an A-, 
 
 * 30 minutes -- 24 hours late (after extensions): lose 20% of points
 * 24 -- 48 hours late (after extensions): lose 40% of points.
-* > 48 hours late (after extensions): no credit
+* more than 48 hours late (after extensions): no credit
 
 If you know you cannot turn in assignment (for instance, if you are ill or there is a family emergency), let me know before the assignment is due, and we will work something out. There will be no grade changes after our last day of class.
 
