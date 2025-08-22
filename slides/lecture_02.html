@@ -45,7 +45,13 @@ class: center, middle, inverse, title-slide
 &lt;img src="whole_game_highlight_understanding.png" width="500"&gt;
 ]
 
---
+---
+
+### The data analysis process
+
+.center[
+&lt;img src="whole_game_highlight_understanding.png" width="500"&gt;
+]
 
 .large[
 *Understanding*:
@@ -145,9 +151,47 @@ Artwork by @allison_horst
 
 .large[
 *Bill length* is a quantitative variable. What plot could we use to visualize the distribution of bill length in the penguins dataset?
+
+.abox[ 
+(A) Scatterplot
 ]
 
---
+.bbox[
+(B) Histogram
+]
+
+.cbox[
+(C) Bar chart
+]
+
+.dbox[
+(D) Pie chart
+]
+]
+
+---
+
+### Visualizations
+
+.large[
+*Bill length* is a quantitative variable. What plot could we use to visualize the distribution of bill length in the penguins dataset?
+
+.abox[ 
+(A) Scatterplot
+]
+
+.bbox[
+(B) Histogram
+]
+
+.cbox[
+(C) Bar chart
+]
+
+.dbox[
+(D) Pie chart
+]
+]
 
 .large[
 **Answer:** A histogram is a good choice for visualizing the distribution of a single quantitative variable.
@@ -159,9 +203,47 @@ Artwork by @allison_horst
 
 .large[
 *Species* is a categorical variable. What plot could we use to visualize the distribution of species in the penguins dataset?
+
+.abox[ 
+(A) Scatterplot
 ]
 
---
+.bbox[
+(B) Histogram
+]
+
+.cbox[
+(C) Bar chart
+]
+
+.dbox[
+(D) Pie chart
+]
+]
+
+---
+
+### Visualizations
+
+.large[
+*Species* is a categorical variable. What plot could we use to visualize the distribution of species in the penguins dataset?
+
+.abox[ 
+(A) Scatterplot
+]
+
+.bbox[
+(B) Histogram
+]
+
+.cbox[
+(C) Bar chart
+]
+
+.dbox[
+(D) Pie chart
+]
+]
 
 .large[
 **Answer:** A bar chart is a good choice for visualizing the distribution of a single categorical variable. Pie charts also work, but I find them harder to read.
@@ -173,9 +255,47 @@ Artwork by @allison_horst
 
 .large[
 *Bill length* and *bill depth* are both quantitative variables. What plot could we use to visualize the relationship between these two variables?
+
+.abox[ 
+(A) Scatterplot
 ]
 
---
+.bbox[
+(B) Histogram
+]
+
+.cbox[
+(C) Bar chart
+]
+
+.dbox[
+(D) Pie chart
+]
+]
+
+---
+
+### Visualizations
+
+.large[
+*Bill length* and *bill depth* are both quantitative variables. What plot could we use to visualize the relationship between these two variables?
+
+.abox[ 
+(A) Scatterplot
+]
+
+.bbox[
+(B) Histogram
+]
+
+.cbox[
+(C) Bar chart
+]
+
+.dbox[
+(D) Pie chart
+]
+]
 
 .large[
 **Answer:** A scatterplot shows the relationship between two quantitative variables.
@@ -324,7 +444,20 @@ penguins |&gt;
 
 ![](lecture_02_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
---
+---
+
+### Coloring by species
+
+
+``` r
+penguins |&gt;
+  ggplot(aes(x = bill_length_mm, 
+             y = bill_depth_mm, 
+             color = species, shape=species)) +
+  geom_point()
+```
+
+![](lecture_02_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
 .large[
 Within each species, there appears to be a positive, linear relationship between bill length and bill depth.
@@ -334,7 +467,7 @@ Within each species, there appears to be a positive, linear relationship between
 
 ### Predicting species
 
-&lt;img src="lecture_02_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="lecture_02_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
 
 .large[
 New penguin 🐧:
