@@ -11,6 +11,7 @@ August 25
 
 August 27
 : Intro to R -- exploratory data analysis
+  : [Slides](https://sta112-f25.github.io/slides/lecture_02.pdf), [Class activity](https://sta112-f25.github.io/class_activities/ca_02.html)
 
 August 29
 : Activity -- beginning R
