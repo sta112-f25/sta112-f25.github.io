@@ -6,4 +6,8 @@ website: https://ciaran-evans.github.io/
 photo: ciaran.jpg
 ---
 
-Office hours:  TBA
+Office hours:  Drop-in office hours will be held at the following times in Manchester 329
+
+* Monday 2 - 3:30pm (this is open to students from all my classes)
+* Wednesday 4-5pm
+* Thursday 9:30 - 10:30am
