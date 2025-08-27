@@ -1,5 +1,5 @@
 ---
-title: Activity: Penguin data
+title: Activity -- Penguin data
 output:
   xaringan::moon_reader:
     css: "lab-slides.css"
@@ -10,12 +10,20 @@ output:
       countIncrementalSlides: false
 ---
 
-## Agenda
+## Agenda and announcements
 
 .large[
+Announcements / reminders:
+
+* HW 1 released on course website, due next Friday on Canvas
+* Office hours Mondays, Wednesdays, and Thursdays
+* Study sessions Wednesdays and Thursdays
+* MSC tutoring begins next week too
+
+Today:
+
 * MSC pitch
 * Class activity
-* HW 1 released on course website, due next Friday on Canvas
 ]
 
 ---
@@ -28,6 +36,7 @@ output:
 * Welcome to work in groups
 * Submit on Canvas when done
 * You may leave if done early, or start HW 1 in class
+* Goal for today is to experience more code. We will start digging in to details next week
 ]
 
 .center[
