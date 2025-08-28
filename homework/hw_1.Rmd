@@ -33,6 +33,18 @@ library(tidyverse)
 4. Fill in answers to questions 1 -- 8. I recommend you save and render as you answer each question, to avoid losing any work and to catch any knitting issues early.
 5. When you are done, render and submit your HTML file on Canvas (Assignments -> Homework 1).
 
+# Part 0: Survey
+
+In this class, we are beginning with data wrangling and exploratory data analysis, and we will soon begin to discuss modeling with linear regression. As we get into modeling, we will also discuss the important skill of *statistical communication*: communicating the results of a statistical analysis to a target audience.
+
+To help me judge where everyone is at with statistical communication at the beginning of the semester, please fill out this brief survey:
+
+[https://forms.gle/o3eX3JQGTwzqYc5a8](https://forms.gle/o3eX3JQGTwzqYc5a8)
+
+Make sure to select *Dr. Evans STA 112* for your class section!
+
+
+
 # Practice with exploratory data analysis
 
 In this section, we'll practice exploratory data analysis in R, using data on flights departing from New York City's three major airports. These questions can be answered by adapting code from the first week of class.
