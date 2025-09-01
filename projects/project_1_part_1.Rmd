@@ -1,0 +1,65 @@
+---
+title: "Project 1, Part 1"
+output: 
+  rmdformats::robobook:
+    css: "homework.css"
+    highlight: pygments
+link-citations: yes
+---
+
+**Due:** Friday, September 12, 10:00pm on Canvas
+
+# Overview
+
+Over the course of this semester, you will complete a project in which you use the tools we have learned in class to investigate a research question of your choosing. You will then write a report that communicates the results of your analysis and draws a conclusion about your research question, and finally present your work to me. 
+
+This project will be broken into several different parts; I will provide feedback on each part.
+
+In this first part, your task is to identify a research question and a dataset that allows you to address that research question. Subsequent parts of the project will then involve using exploratory data analysis to explore the data thoroughly, using linear regression to answer your research question, and finally presenting your results. 
+
+### Overview of project pieces
+
+1. Select a research question and dataset (5% of total project grade)
+2. Use EDA to explore data thoroughly (30% of total project grade)
+3. Use linear regression to answer your research question, and produce a written report describing your analysis, results, and conclusions (35% of total project grade)
+4. Oral interview to present your results and processes to Dr. Evans (30% of total project grade)
+    * I will be asking questions as you go along the way, just like a client would do who was interested in your results. Be prepared to explain your process and results, and answer questions from me!
+
+# Your task in Part I
+
+Come up with a research question that you can answer with data, and find a dataset that allows you to tackle this research question. 
+
+An example of a research question we have seen in class is from the FiveThirtyEight article on the first day: "Do home teams perform better (score more points compared to the opposition) when there are more fans in the stands?" The dataset in this example is the combination of score data from Basketball Reference, and the fan attendance data.
+
+(You may not use this example, nor any of the other datasets we have worked with in class).
+
+### Requirements
+
+* The outcome of interest (e.g., the point differential in the FiveThirtyEight article) must be a *quantitative* variable
+* The data must contain at least **5** other variables which you think may be related to the outcome of interest (e.g., fan attendance in the example above), and which help address your research question.
+    * At least one of these variables must be categorical
+    * At least two of these variables must be quantitative
+* Everyone must choose their own data and research question
+
+# To submit
+
+A document describing:
+
+* Your research question
+* The dataset you will use
+* The source of your data
+* The variables in your data
+
+# A few ideas for data sources
+
+* The OpenIntro textbooks have a great [list of datasets](https://www.openintro.org/data/)
+* Shonda Kuiper has compiled a [list](https://stat2labs.sites.grinnell.edu/DataResources.html) of different data sources
+* The [TidyTuesday](https://github.com/rfordatascience/tidytuesday) project has a long list of many different datasets
+* The [nhanesA](https://cran.r-project.org/web/packages/nhanesA/vignettes/Introducing_nhanesA.html) package allows you to explore and retrieve data from the National Health and Nutrition Examination Survey
+* [College ScoreCard data](https://collegescorecard.ed.gov/) for many different institutions
+* [American time use survey data](https://github.com/swang87/atus)
+* [Lahman baseball data](https://cran.r-project.org/web/packages/Lahman/index.html)
+* CDC [Behaviorial Risk Factor Surveillance System](https://www.cdc.gov/brfss/) data
+* National Park [visitor use statistics](https://irma.nps.gov/Stats/)
+
+
