@@ -9,5 +9,14 @@ September 1
 September 3
 : **No class**{: .label .label-blue}
 
+: Data exploration cheat sheet
+  : [Cheat sheet](https://sta112-f25.github.io/homework/data_visualization_summary_cheat_sheet.html)
+
+: **Project part 1 released**{: .label .label-green }
+  : [Part 1](https://sta112-f25.github.io/projects/project_1_part_1.html)
+
 September 5
-: Data wrangling
+: Intro to regression
+
+: Reading for Monday's class
+  : Textbook 1.1
