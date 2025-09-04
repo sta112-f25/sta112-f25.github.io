@@ -69,8 +69,6 @@ $\text{life expectancy} \overset{?}{=} f(\text{GDP per capita})$
 ]
 
 .large[
-* $f$ = average life expectancy, given GDP per capita
-
 .question[
 Do all of the observations fall exactly on the curve?
 ]
@@ -233,7 +231,7 @@ How do we estimate $f$? Depends on our goal.
 ### Prediction, interpretation/association, or causal inference?
 
 .large[
-**Scenario:** The beer company advertises on several different platforms: Facebook, Instagram, Twitter, YouTube, and on several popular podcasts. They want to know whether the amount they spend on each platform is associated with an increase in sales.
+**Scenario:** The beer company advertises on several different platforms: Facebook, Instagram, YouTube, and on several popular podcasts. They want to know whether the amount they spend on each platform is associated with an increase in sales.
 
 .abox[
 (A) Prediction
@@ -253,7 +251,7 @@ How do we estimate $f$? Depends on our goal.
 ### Prediction, interpretation/association, or causal inference?
 
 .large[
-**Scenario:** The beer company advertises on several different platforms: Facebook, Instagram, Twitter, YouTube, and on several popular podcasts. They want to know whether the amount they spend on each platform is associated with an increase in sales.
+**Scenario:** The beer company advertises on several different platforms: Facebook, Instagram, YouTube, and on several popular podcasts. They want to know whether the amount they spend on each platform is associated with an increase in sales.
 
 .abox[
 (A) Prediction
@@ -605,7 +603,10 @@ $\widehat{\text{bill length}} = 26.74 + 0.004 \ \text{body mass}$
 Suppose a Gentoo penguin has mass 5000g. What is the predicted bill length?
 
 
-**Answer:** $26.74 + 0.004 \cdot 5000 = 46.74$
+**Answer:**  
+
+$$26.74 + 0.004 \cdot 5000 = 46.74$$
+
 ]
 
 ---

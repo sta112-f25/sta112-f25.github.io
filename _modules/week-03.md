@@ -3,13 +3,13 @@ title: Introduction to linear regression
 ---
 
 September 8
-: Introduction to regression
+: Least squares
 
 : Reading for Wednesday's class
-  : Textbook 1.1
+  : Textbook 1.2, 1.3
 
 September 10
-: Least squares
+: Predictions and correlation
 
 : Reading for Friday's class
   : Textbook 1.2, 1.3
