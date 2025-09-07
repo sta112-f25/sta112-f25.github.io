@@ -9,6 +9,21 @@ link-citations: yes
 
 **Use:** The purpose of this cheat sheet is to serve as a refresher on different types of variables, plots we can use to visualize them, and code for making those plots. We also discuss some summary statistics.
 
+# Reading data into R
+
+For your projects, you will need to download data from the internet and load it into R. Most sites will allow you to download data as a CSV file. So, we need to know how to load a CSV file into R!
+
+In R, we can use the `read_csv` function in the `readr` package from the `tidyverse`. Your code will look something like this:
+
+```{r, eval=F}
+library(tidyverse)
+
+my_data <- read_csv("...")
+```
+
+where you will fill in the `...` with the path to your CSV file. 
+
+
 # Types of variables
 
 Here we will deal mainly with *categorical* and *quantitative* variables. 
@@ -20,6 +35,20 @@ Here we will deal mainly with *categorical* and *quantitative* variables.
     * Examples: number of pets, height, weight, age
     * *Discrete* quantitative variables only take on discrete values (e.g., number of pets)
     * *Continuous* quantitative variables can take on an entire range of values (e.g., height is continuous if we allow heights like 60.323 inches)
+
+# Identifying missing values
+
+The following code can be used to identify the number of missing values in columns of a dataset. For example, suppose I wish to find missing values in the `penguins` dataset:
+
+```{r, message=F, warning=F}
+library(palmerpenguins)
+
+colSums(is.na(penguins))
+```
+
+This tells me there are no missing values in species, island, or year; there are 2 missing values (they may or may not be the same rows) in bill length, bill depth, flipper length, and body mass; and there are 11 missing values in sex.
+
+If a column has too many missing values, we may wish to exclude that column from our analysis!
 
 
 # Univariate exploratory data analysis
