@@ -1,0 +1,980 @@
+---
+title: Least-Squares Regression
+output:
+  xaringan::moon_reader:
+    css: "lab-slides.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### Agenda
+
+.large[
+* Today: 
+    * How do we estimate coefficients in a linear regression model?
+    * More on prediction
+* Later this week
+    * Prediction and correlation
+    * Activity: practicing statistical communication
+]
+
+
+---
+
+
+### Recap: regression
+
+.large[
+**Regression:** model the relationship between predictor $x$ and response $y$
+
+**Regression model:** $y = f(x) + \varepsilon$
+
+* $f$ = systematic information that $x$ provides about $y$
+* $\varepsilon$ = random noise
+
+**Linear regression:** $y = \beta_0 + \beta_1 x + \varepsilon$
+
+]
+
+---
+
+### Recap: linear regression
+
+.large[
+**Observed data (sample):** Weight and wing length for 116 sparrows
+]
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width=6, fig.height=4}
+library(Stat2Data)
+library(tidyverse)
+data(Sparrows)
+
+Sparrows %>%
+  ggplot(aes(x = Weight, y = WingLength)) +
+  geom_point(size=2.5) +
+  labs(x = "Weight (g)", 
+       y = "Wing Length (mm)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+```
+
+.large[
+**Regression model (population):**
+
+.center[
+$\text{WingLength} = \beta_0 + \beta_1 \text{Weight} + \varepsilon$
+]
+]
+
+---
+
+### Recap: linear regression
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width=6, fig.height=4}
+library(Stat2Data)
+library(tidyverse)
+data(Sparrows)
+
+Sparrows %>%
+  ggplot(aes(x = Weight, y = WingLength)) +
+  geom_point(size=2.5) +
+  labs(x = "Weight (g)", 
+       y = "Wing Length (mm)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+```
+
+.large[
+
+**Estimated regression line (from sample):**
+
+.center[
+$\widehat{\text{WingLength}} = 8.76 + 1.31 \ \text{Weight}$
+]
+]
+
+.large[
+* $\widehat{\beta}_0 = 8.76$
+* $\widehat{\beta}_1 = 1.31$
+]
+    
+---
+
+### Recap: interpreting regression coefficients
+
+.large[
+.center[
+$\widehat{\text{WingLength}} = 8.76 + 1.31 \ \text{Weight}$
+]
+]
+
+.large[
+**Interpreting $\widehat{\beta}_0$:** If weight = 0g, we predict a wing length of 8.76mm.
+
+**Interpreting $\widehat{\beta}_1$:** An increase of 1g in weight is associated with an increase of 1.31mm, on average, in wing length
+]
+
+---
+
+### Concept check
+
+.large[
+Interested in the relationship between mileage and price for used Honda Accords. We will use linear regression.
+
+.pull-left[
+
+```{r, echo=F, fig.align='center', fig.width=6, fig.height=4}
+data("AccordPrice")
+AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  labs(x = "Miles (in 1000's)",
+       y = "Price (in $1000's)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+```
+]
+
+
+.pull-right[
+Write the population regression model:
+
+.abox[
+(A) $\text{price} = \beta_0 + \beta_1 \text{miles}$
+]
+
+.bbox[
+(B) $\text{price} = \beta_0 + \beta_1 \text{miles} + \varepsilon$
+]
+
+.cbox[
+(C) $\widehat{\text{price}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{miles}$
+]
+
+.dbox[
+(D) $\widehat{\text{price}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{miles} + \varepsilon$
+]
+
+]
+]
+
+---
+
+### Concept check
+
+.large[
+Interested in the relationship between mileage and price for used Honda Accords. We will use linear regression.
+
+.pull-left[
+
+```{r, echo=F, fig.align='center', fig.width=6, fig.height=4}
+data("AccordPrice")
+AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  labs(x = "Miles (in 1000's)",
+       y = "Price (in $1000's)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+```
+]
+
+
+.pull-right[
+Write the population regression model:
+
+.abox[
+(A) $\text{price} = \beta_0 + \beta_1 \text{miles}$
+]
+
+.bbox[
+(B) $\text{price} = \beta_0 + \beta_1 \text{miles} + \varepsilon$
+]
+
+.cbox[
+(C) $\widehat{\text{price}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{miles}$
+]
+
+.dbox[
+(D) $\widehat{\text{price}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{miles} + \varepsilon$
+]
+
+]
+]
+
+.large[
+**Answer:** (B)
+]
+
+---
+
+### Linear regression
+
+```{r echo=F, message=F, fig.align='center', fig.width = 6, fig.height=4}
+AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  geom_smooth(se=F, method="lm") +
+  labs(x = "Miles (in 1000's)",
+       y = "Price (in $1000's)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+```
+
+.large[
+**Estimated line** (from sample): $\widehat{\text{price}} = 20.81 - 0.12 \ \text{miles}$
+
+How do we calculate $\widehat{\beta}_0$ and $\widehat{\beta}_1$?
+]
+
+---
+
+### Choosing between different lines
+
+```{r echo=F, message=F, fig.align='center', fig.width = 12, fig.height=4}
+library(patchwork)
+p1 <- AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 27, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles (in 1000's)",
+       y = "Price (in $1000's)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p2 <- AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 20, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles (in 1000's)",
+       y = "Price (in $1000's)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p3 <- AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.02, intercept = 15, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles (in 1000's)",
+       y = "Price (in $1000's)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p1 + p2 + p3
+```
+
+.large[
+.question[
+Which one looks like the best choice?
+]
+]
+
+---
+
+### Choosing between different lines
+
+```{r echo=F, message=F, fig.align='center', fig.width = 12, fig.height=4}
+library(patchwork)
+p1 <- AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 27, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles (in 1000's)",
+       y = "Price (in $1000's)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p2 <- AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 20, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles (in 1000's)",
+       y = "Price (in $1000's)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p3 <- AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.02, intercept = 15, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles (in 1000's)",
+       y = "Price (in $1000's)") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p1 + p2 + p3
+```
+
+.large[
+.question[
+Which one looks like the best choice?
+]
+]
+
+.large[
+Intuitively, want the line to "go through" the points. Can we formalize this?
+]
+
+---
+
+### Residuals
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width = 6, fig.height=4}
+AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_segment(aes(x = 20.8, y = 17.92, 
+                   xend = 20.8, yend = 22.8),
+                   color = "red", lwd=1.5) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 20, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+```
+
+.large[
+Car with mileage = 20.8
+
+* Prediction: $\widehat{Price} = 18$
+* Observed: $Price = 22.8$
+
+Residual: $Price - \widehat{Price} = 22.8 - 18 = 4.8$
+]
+
+---
+
+### Residuals
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width = 6, fig.height=3.5}
+AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_segment(aes(x = 20.8, y = 17.92, 
+                   xend = 20.8, yend = 22.8),
+                   color = "red", lwd=1.2) +
+  geom_segment(aes(x = 89.4, y = 3.5, 
+                   xend = 89.4, yend = 11.06),
+                   color = "red", lwd=1.2) +
+  geom_point(size=2) +
+  geom_abline(slope = -0.1, intercept = 20, color = "blue",
+              lwd = 1.2) +
+  labs(x = "Miles", 
+       y = "Price") +
+  theme_bw() +
+  theme(text = element_text(size=20))
+```
+
+.pull-left[
+.large[
+* Prediction: $\widehat{Price} = 18$
+* Observed: $Price = 22.8$
+
+$Price - \widehat{Price} = 4.8$
+]
+]
+
+.pull-right[
+.large[
+* Prediction: $\widehat{Price} = 11.06$
+* Observed: $Price = 3.5$
+
+$Price - \widehat{Price} = -7.56$
+]
+]
+
+.large[
+.question[
+Which of these predictions is closer?
+]
+]
+
+---
+
+### Residuals
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width = 6, fig.height=3.5}
+AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_segment(aes(x = 20.8, y = 17.92, 
+                   xend = 20.8, yend = 22.8),
+                   color = "red", lwd=1.2) +
+  geom_segment(aes(x = 89.4, y = 3.5, 
+                   xend = 89.4, yend = 11.06),
+                   color = "red", lwd=1.2) +
+  geom_point(size=2) +
+  geom_abline(slope = -0.1, intercept = 20, color = "blue",
+              lwd = 1.2) +
+  labs(x = "Miles", 
+       y = "Price") +
+  theme_bw() +
+  theme(text = element_text(size=20))
+```
+
+.pull-left[
+.large[
+* Prediction: $\widehat{Price} = 18$
+* Observed: $Price = 22.8$
+
+$Price - \widehat{Price} = 4.8$
+]
+]
+
+.pull-right[
+.large[
+* Prediction: $\widehat{Price} = 11.06$
+* Observed: $Price = 3.5$
+
+$Price - \widehat{Price} = -7.56$
+]
+]
+
+.large[
+.question[
+What does a *positive* residual mean?
+]
+]
+
+---
+
+### Residuals
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width = 6, fig.height=3.5}
+AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_segment(aes(x = 20.8, y = 17.92, 
+                   xend = 20.8, yend = 22.8),
+                   color = "red", lwd=1.2) +
+  geom_segment(aes(x = 89.4, y = 3.5, 
+                   xend = 89.4, yend = 11.06),
+                   color = "red", lwd=1.2) +
+  geom_point(size=2) +
+  geom_abline(slope = -0.1, intercept = 20, color = "blue",
+              lwd = 1.2) +
+  labs(x = "Miles", 
+       y = "Price") +
+  theme_bw() +
+  theme(text = element_text(size=20))
+```
+
+.pull-left[
+.large[
+* Prediction: $\widehat{Price} = 18$
+* Observed: $Price = 22.8$
+
+$Price - \widehat{Price} = 4.8$
+]
+]
+
+.pull-right[
+.large[
+* Prediction: $\widehat{Price} = 11.06$
+* Observed: $Price = 3.5$
+
+$Price - \widehat{Price} = -7.56$
+]
+]
+
+.large[
+.question[
+What does a *negative* residual mean?
+]
+]
+
+---
+
+### Residuals
+
+```{r echo=F, message=F, fig.align='center', fig.width = 12, fig.height=4}
+p1 <- AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_segment(aes(xend = Mileage,
+                   yend = 27 - 0.1*Mileage),
+               color = "red",
+               lwd=1.5) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 27, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p2 <- AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_segment(aes(xend = Mileage,
+                   yend = 20 - 0.1*Mileage),
+               color = "red",
+               lwd=1.5) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 20, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p3 <- AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_segment(aes(xend = Mileage,
+                   yend = 15 - 0.02*Mileage),
+               color = "red",
+               lwd=1.5) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.02, intercept = 15, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p1 + p2 + p3
+```
+
+.large[
+.question[
+Which of these lines looks like the best fit? Why?
+]
+]
+
+---
+
+### Sum of the squared residuals
+               
+```{r echo=F, message=F, fig.align='center', fig.width = 12, fig.height=3}
+p1 <- AccordPrice %>%
+  mutate(fitted = 27 - 0.1*Mileage) %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_rect(aes(xmin = Mileage, 
+                xmax = Mileage + Price - fitted,
+                ymin = Price, ymax = fitted), 
+            fill = "red", color = "red", alpha = 0.2) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 27, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price",
+       title = "SSE = 1871.17") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p2 <- AccordPrice %>%
+  mutate(fitted = 20 - 0.1*Mileage) %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_rect(aes(xmin = Mileage, 
+                xmax = Mileage + Price - fitted,
+                ymin = Price, ymax = fitted), 
+            fill = "red", color = "red", alpha = 0.2) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 20, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price",
+       title = "SSE = 287.49") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p3 <- AccordPrice %>%
+  mutate(fitted = 15 - 0.02*Mileage) %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_rect(aes(xmin = Mileage, 
+                xmax = Mileage + Price - fitted,
+                ymin = Price, ymax = fitted), 
+            fill = "red", color = "red", alpha = 0.2) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.02, intercept = 15, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price",
+       title = "SSE = 747.78") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p1 + p2 + p3
+```
+
+.large[
+Sum of squared residuals (SSE) = $\sum_{i=1}^n (y_i - \widehat{y}_i)^2$
+]
+
+---
+
+### Least Squares
+
+```{r echo=F, message=F, fig.align='center', fig.width = 12, fig.height=3}
+p1 <- AccordPrice %>%
+  mutate(fitted = 27 - 0.1*Mileage) %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_rect(aes(xmin = Mileage, 
+                xmax = Mileage + Price - fitted,
+                ymin = Price, ymax = fitted), 
+            fill = "red", color = "red", alpha = 0.2) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 27, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price",
+       title = "SSE = 1871.17") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p2 <- AccordPrice %>%
+  mutate(fitted = 20 - 0.1*Mileage) %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_rect(aes(xmin = Mileage, 
+                xmax = Mileage + Price - fitted,
+                ymin = Price, ymax = fitted), 
+            fill = "red", color = "red", alpha = 0.2) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.1, intercept = 20, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price",
+       title = "SSE = 287.49") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p3 <- AccordPrice %>%
+  mutate(fitted = 15 - 0.02*Mileage) %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_rect(aes(xmin = Mileage, 
+                xmax = Mileage + Price - fitted,
+                ymin = Price, ymax = fitted), 
+            fill = "red", color = "red", alpha = 0.2) +
+  geom_point(size=2.5) +
+  geom_abline(slope = -0.02, intercept = 15, color = "blue",
+              lwd = 1.5) +
+  labs(x = "Miles", 
+       y = "Price",
+       title = "SSE = 747.78") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+
+p1 + p2 + p3
+```
+
+.large[
+Sum of squared residuals (SSE) = $\sum_{i=1}^n (y_i - \widehat{y}_i)^2 = \sum_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1 x_i)^2$
+
+Choose $\widehat{\beta}_0$, $\widehat{\beta}_1$ to minimize SSE.
+]
+
+---
+
+### Class activity, Part I
+
+.large[
+Spend a couple minutes trying out different potential values for the estimated slope and intercept. 
+
+[https://sta112-f25.github.io/class_activities/ca_06.html](https://sta112-f25.github.io/class_activities/ca_06.html)
+]
+
+---
+
+### Fitting linear regression in R
+
+```{r echo=F, fig.width=6, fig.height=4, fig.align='center'}
+AccordPrice %>%
+  ggplot(aes(x = Mileage, y = Price)) +
+  geom_point(size=2.5) +
+  labs(x = "Miles", 
+       y = "Price") +
+  theme_bw() +
+  theme(text = element_text(size=25))
+```
+
+.large[
+```r
+lm(Price ~ Mileage, data = AccordPrice)
+```
+]
+
+.large[
+* `lm`: function used for regression ("linear model")
+* `Price`: response variable
+* `Mileage`: predictor
+]
+
+---
+
+### Fitting linear regression in R
+
+.large[
+```{r}
+lm(Price ~ Mileage, data = AccordPrice)
+```
+
+* $\widehat{\beta}_0 = 20.81$
+* $\widehat{\beta}_1 = -0.12$
+]
+
+---
+
+### Class activity, Part II
+
+.large[
+[https://sta112-f25.github.io/class_activities/ca_06.html](https://sta112-f25.github.io/class_activities/ca_06.html)
+]
+
+---
+
+### Calculating $\widehat{\beta}_0$ and $\widehat{\beta}_1$
+
+.large[
+.center[
+$SSE = \sum_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1 x_i)^2$
+]
+]
+
+.large[
+Choose $\widehat{\beta}_0$, $\widehat{\beta}_1$ to minimize SSE
+
+* Option 1: search for $\widehat{\beta}_0$, $\widehat{\beta}_1$ like in class activity Part I
+]
+
+---
+
+### Calculating $\widehat{\beta}_0$ and $\widehat{\beta}_1$
+
+.large[
+.center[
+$SSE = \sum_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1 x_i)^2$
+]
+]
+
+.large[
+Choose $\widehat{\beta}_0$, $\widehat{\beta}_1$ to minimize SSE
+
+* Option 1: search for $\widehat{\beta}_0$, $\widehat{\beta}_1$ like in class activity Part I
+]
+.large[
+
+    * not efficient
+    * not what R does
+]
+
+---
+
+### Calculating $\widehat{\beta}_0$ and $\widehat{\beta}_1$
+
+.large[
+.center[
+$SSE = \sum_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1 x_i)^2$
+]
+]
+
+.large[
+Choose $\widehat{\beta}_0$, $\widehat{\beta}_1$ to minimize SSE
+
+* Option 1: search for $\widehat{\beta}_0$, $\widehat{\beta}_1$ like in class activity Part I
+]
+.large[
+
+    * not efficient
+    * not what R does
+]
+
+.large[
+* Option 2: closed-form equation?
+]
+
+---
+
+### Equations for $\widehat{\beta}_0$ and $\widehat{\beta}_1$
+
+.large[
+.center[
+$\widehat{\beta}_1 = \dfrac{\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})}{\sum_{i=1}^n (x_i - \overline{x})^2}$
+
+$\widehat{\beta}_0 = \overline{y} - \widehat{\beta}_1 \overline{x}$
+]
+]
+
+.large[
+where 
+
+.center[
+$\overline{x} = \frac{1}{n} \sum_{i=1}^n x_i$
+
+$\overline{y} = \frac{1}{n} \sum_{i=1}^n y_i$
+]
+]
+
+---
+
+### Making predictions
+
+.large[
+Goal: predict a house's sale price using either its year built or its size
+]
+
+```{r, echo=F, message=F, warning=F, fig.width=10, fig.height=4}
+library(Stat2Data)
+data("GrinnellHouses")
+library(gridExtra)
+
+p1 <- GrinnellHouses |>
+  filter(YearBuilt > 1900) |>
+  ggplot(aes(x = YearBuilt, y = SalePrice)) +
+  geom_point() +
+  geom_smooth(se=F, method = "lm") +
+  theme_bw() +
+  theme(text = element_text(size = 20)) +
+  labs(x = "Year built",
+       y = "Sale price ($)")
+
+p2 <- GrinnellHouses |>
+  filter(YearBuilt > 1900) |>
+  ggplot(aes(x = SquareFeet, y = SalePrice)) +
+  geom_point() +
+  geom_smooth(se=F, method = "lm") +
+  theme_bw() +
+  theme(text = element_text(size = 20)) +
+  labs(x = "House size (square feet)",
+       y = "Sale price ($)")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+.large[
+.question[
+Which of the two variables would you prefer to use?
+]
+]
+
+---
+
+### Making predictions
+
+.large[
+.center[
+$SSE = \sum_{i=1}^n (y_i - \widehat{y}_i)^2$
+]
+]
+
+```{r, echo=F, message=F, warning=F, fig.width=10, fig.height=4}
+library(Stat2Data)
+data("GrinnellHouses")
+library(gridExtra)
+
+p1 <- GrinnellHouses |>
+  filter(YearBuilt > 1900) |>
+  ggplot(aes(x = YearBuilt, y = SalePrice)) +
+  geom_point() +
+  geom_smooth(se=F, method = "lm") +
+  theme_bw() +
+  theme(text = element_text(size = 20)) +
+  labs(x = "Year built",
+       y = "Sale price ($)")
+
+p2 <- GrinnellHouses |>
+  filter(YearBuilt > 1900) |>
+  ggplot(aes(x = SquareFeet, y = SalePrice)) +
+  geom_point() +
+  geom_smooth(se=F, method = "lm") +
+  theme_bw() +
+  theme(text = element_text(size = 20)) +
+  labs(x = "House size (square feet)",
+       y = "Sale price ($)")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+.pull-left[
+.large[
+SSE: $3.41 \times 10^{12}$
+]
+]
+
+.pull-right[
+.large[
+SSE: $1.74 \times 10^{12}$
+]
+]
+
+.large[
+SSE measures how close, overall, our predictions are to the observed response!
+]
+
+---
+
+### Making predictions
+
+.large[
+.center[
+$SSE = \sum_{i=1}^n (y_i - \widehat{y}_i)^2$
+]
+]
+
+```{r, echo=F, message=F, warning=F, fig.width=10, fig.height=4}
+library(Stat2Data)
+data("GrinnellHouses")
+library(gridExtra)
+
+p1 <- GrinnellHouses |>
+  filter(YearBuilt > 1900) |>
+  ggplot(aes(x = YearBuilt, y = SalePrice)) +
+  geom_point() +
+  geom_smooth(se=F, method = "lm") +
+  theme_bw() +
+  theme(text = element_text(size = 20)) +
+  labs(x = "Year built",
+       y = "Sale price ($)")
+
+p2 <- GrinnellHouses |>
+  filter(YearBuilt > 1900) |>
+  ggplot(aes(x = SquareFeet, y = SalePrice)) +
+  geom_point() +
+  geom_smooth(se=F, method = "lm") +
+  theme_bw() +
+  theme(text = element_text(size = 20)) +
+  labs(x = "House size (square feet)",
+       y = "Sale price ($)")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+.pull-left[
+.large[
+SSE: $3.41 \times 10^{12}$
+]
+]
+
+.pull-right[
+.large[
+SSE: $1.74 \times 10^{12}$
+]
+]
+
+.large[
+.question[
+Why are these numbers so *large*?
+]
+]
+
+---
+
+### Making predictions
+
+.large[
+.center[
+$SSE = \sum_{i=1}^n (y_i - \widehat{y}_i)^2$
+]
+]
+
+.large[
+* Depends on the scale of the response variable
+* Depends on the *number* of observations
+]
+

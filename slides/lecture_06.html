@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Least-Squares Regression</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link rel="stylesheet" href="lab-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Least-Squares Regression
+]
+
+---
+
+
+### Agenda
+
+.large[
+* Today: 
+    * How do we estimate coefficients in a linear regression model?
+    * More on prediction
+* Later this week
+    * Prediction and correlation
+    * Activity: practicing statistical communication
+]
+
+
+---
+
+
+### Recap: regression
+
+.large[
+**Regression:** model the relationship between predictor `\(x\)` and response `\(y\)`
+
+**Regression model:** `\(y = f(x) + \varepsilon\)`
+
+* `\(f\)` = systematic information that `\(x\)` provides about `\(y\)`
+* `\(\varepsilon\)` = random noise
+
+**Linear regression:** `\(y = \beta_0 + \beta_1 x + \varepsilon\)`
+
+]
+
+---
+
+### Recap: linear regression
+
+.large[
+**Observed data (sample):** Weight and wing length for 116 sparrows
+]
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+**Regression model (population):**
+
+.center[
+`\(\text{WingLength} = \beta_0 + \beta_1 \text{Weight} + \varepsilon\)`
+]
+]
+
+---
+
+### Recap: linear regression
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+
+**Estimated regression line (from sample):**
+
+.center[
+`\(\widehat{\text{WingLength}} = 8.76 + 1.31 \ \text{Weight}\)`
+]
+]
+
+.large[
+* `\(\widehat{\beta}_0 = 8.76\)`
+* `\(\widehat{\beta}_1 = 1.31\)`
+]
+    
+---
+
+### Recap: interpreting regression coefficients
+
+.large[
+.center[
+`\(\widehat{\text{WingLength}} = 8.76 + 1.31 \ \text{Weight}\)`
+]
+]
+
+.large[
+**Interpreting `\(\widehat{\beta}_0\)`:** If weight = 0g, we predict a wing length of 8.76mm.
+
+**Interpreting `\(\widehat{\beta}_1\)`:** An increase of 1g in weight is associated with an increase of 1.31mm, on average, in wing length
+]
+
+---
+
+### Concept check
+
+.large[
+Interested in the relationship between mileage and price for used Honda Accords. We will use linear regression.
+
+.pull-left[
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+.pull-right[
+Write the population regression model:
+
+.abox[
+(A) `\(\text{price} = \beta_0 + \beta_1 \text{miles}\)`
+]
+
+.bbox[
+(B) `\(\text{price} = \beta_0 + \beta_1 \text{miles} + \varepsilon\)`
+]
+
+.cbox[
+(C) `\(\widehat{\text{price}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{miles}\)`
+]
+
+.dbox[
+(D) `\(\widehat{\text{price}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{miles} + \varepsilon\)`
+]
+
+]
+]
+
+---
+
+### Concept check
+
+.large[
+Interested in the relationship between mileage and price for used Honda Accords. We will use linear regression.
+
+.pull-left[
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+
+.pull-right[
+Write the population regression model:
+
+.abox[
+(A) `\(\text{price} = \beta_0 + \beta_1 \text{miles}\)`
+]
+
+.bbox[
+(B) `\(\text{price} = \beta_0 + \beta_1 \text{miles} + \varepsilon\)`
+]
+
+.cbox[
+(C) `\(\widehat{\text{price}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{miles}\)`
+]
+
+.dbox[
+(D) `\(\widehat{\text{price}} = \widehat{\beta}_0 + \widehat{\beta}_1 \text{miles} + \varepsilon\)`
+]
+
+]
+]
+
+.large[
+**Answer:** (B)
+]
+
+---
+
+### Linear regression
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+**Estimated line** (from sample): `\(\widehat{\text{price}} = 20.81 - 0.12 \ \text{miles}\)`
+
+How do we calculate `\(\widehat{\beta}_0\)` and `\(\widehat{\beta}_1\)`?
+]
+
+---
+
+### Choosing between different lines
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+.question[
+Which one looks like the best choice?
+]
+]
+
+---
+
+### Choosing between different lines
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+.question[
+Which one looks like the best choice?
+]
+]
+
+.large[
+Intuitively, want the line to "go through" the points. Can we formalize this?
+]
+
+---
+
+### Residuals
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+Car with mileage = 20.8
+
+* Prediction: `\(\widehat{Price} = 18\)`
+* Observed: `\(Price = 22.8\)`
+
+Residual: `\(Price - \widehat{Price} = 22.8 - 18 = 4.8\)`
+]
+
+---
+
+### Residuals
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+.pull-left[
+.large[
+* Prediction: `\(\widehat{Price} = 18\)`
+* Observed: `\(Price = 22.8\)`
+
+`\(Price - \widehat{Price} = 4.8\)`
+]
+]
+
+.pull-right[
+.large[
+* Prediction: `\(\widehat{Price} = 11.06\)`
+* Observed: `\(Price = 3.5\)`
+
+`\(Price - \widehat{Price} = -7.56\)`
+]
+]
+
+.large[
+.question[
+Which of these predictions is closer?
+]
+]
+
+---
+
+### Residuals
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+.pull-left[
+.large[
+* Prediction: `\(\widehat{Price} = 18\)`
+* Observed: `\(Price = 22.8\)`
+
+`\(Price - \widehat{Price} = 4.8\)`
+]
+]
+
+.pull-right[
+.large[
+* Prediction: `\(\widehat{Price} = 11.06\)`
+* Observed: `\(Price = 3.5\)`
+
+`\(Price - \widehat{Price} = -7.56\)`
+]
+]
+
+.large[
+.question[
+What does a *positive* residual mean?
+]
+]
+
+---
+
+### Residuals
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
+
+.pull-left[
+.large[
+* Prediction: `\(\widehat{Price} = 18\)`
+* Observed: `\(Price = 22.8\)`
+
+`\(Price - \widehat{Price} = 4.8\)`
+]
+]
+
+.pull-right[
+.large[
+* Prediction: `\(\widehat{Price} = 11.06\)`
+* Observed: `\(Price = 3.5\)`
+
+`\(Price - \widehat{Price} = -7.56\)`
+]
+]
+
+.large[
+.question[
+What does a *negative* residual mean?
+]
+]
+
+---
+
+### Residuals
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+.question[
+Which of these lines looks like the best fit? Why?
+]
+]
+
+---
+
+### Sum of the squared residuals
+               
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+Sum of squared residuals (SSE) = `\(\sum_{i=1}^n (y_i - \widehat{y}_i)^2\)`
+]
+
+---
+
+### Least Squares
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+Sum of squared residuals (SSE) = `\(\sum_{i=1}^n (y_i - \widehat{y}_i)^2 = \sum_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1 x_i)^2\)`
+
+Choose `\(\widehat{\beta}_0\)`, `\(\widehat{\beta}_1\)` to minimize SSE.
+]
+
+---
+
+### Class activity, Part I
+
+.large[
+Spend a couple minutes trying out different potential values for the estimated slope and intercept. 
+
+[https://sta112-f25.github.io/class_activities/ca_06.html](https://sta112-f25.github.io/class_activities/ca_06.html)
+]
+
+---
+
+### Fitting linear regression in R
+
+&lt;img src="lecture_06_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+```r
+lm(Price ~ Mileage, data = AccordPrice)
+```
+]
+
+.large[
+* `lm`: function used for regression ("linear model")
+* `Price`: response variable
+* `Mileage`: predictor
+]
+
+---
+
+### Fitting linear regression in R
+
+.large[
+
+``` r
+lm(Price ~ Mileage, data = AccordPrice)
+```
+
+```
+## 
+## Call:
+## lm(formula = Price ~ Mileage, data = AccordPrice)
+## 
+## Coefficients:
+## (Intercept)      Mileage  
+##     20.8096      -0.1198
+```
+
+* `\(\widehat{\beta}_0 = 20.81\)`
+* `\(\widehat{\beta}_1 = -0.12\)`
+]
+
+---
+
+### Class activity, Part II
+
+.large[
+[https://sta112-f25.github.io/class_activities/ca_06.html](https://sta112-f25.github.io/class_activities/ca_06.html)
+]
+
+---
+
+### Calculating `\(\widehat{\beta}_0\)` and `\(\widehat{\beta}_1\)`
+
+.large[
+.center[
+`\(SSE = \sum_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1 x_i)^2\)`
+]
+]
+
+.large[
+Choose `\(\widehat{\beta}_0\)`, `\(\widehat{\beta}_1\)` to minimize SSE
+
+* Option 1: search for `\(\widehat{\beta}_0\)`, `\(\widehat{\beta}_1\)` like in class activity Part I
+]
+
+---
+
+### Calculating `\(\widehat{\beta}_0\)` and `\(\widehat{\beta}_1\)`
+
+.large[
+.center[
+`\(SSE = \sum_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1 x_i)^2\)`
+]
+]
+
+.large[
+Choose `\(\widehat{\beta}_0\)`, `\(\widehat{\beta}_1\)` to minimize SSE
+
+* Option 1: search for `\(\widehat{\beta}_0\)`, `\(\widehat{\beta}_1\)` like in class activity Part I
+]
+.large[
+
+    * not efficient
+    * not what R does
+]
+
+---
+
+### Calculating `\(\widehat{\beta}_0\)` and `\(\widehat{\beta}_1\)`
+
+.large[
+.center[
+`\(SSE = \sum_{i=1}^n (y_i - \widehat{\beta}_0 - \widehat{\beta}_1 x_i)^2\)`
+]
+]
+
+.large[
+Choose `\(\widehat{\beta}_0\)`, `\(\widehat{\beta}_1\)` to minimize SSE
+
+* Option 1: search for `\(\widehat{\beta}_0\)`, `\(\widehat{\beta}_1\)` like in class activity Part I
+]
+.large[
+
+    * not efficient
+    * not what R does
+]
+
+.large[
+* Option 2: closed-form equation?
+]
+
+---
+
+### Equations for `\(\widehat{\beta}_0\)` and `\(\widehat{\beta}_1\)`
+
+.large[
+.center[
+`\(\widehat{\beta}_1 = \dfrac{\sum_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})}{\sum_{i=1}^n (x_i - \overline{x})^2}\)`
+
+`\(\widehat{\beta}_0 = \overline{y} - \widehat{\beta}_1 \overline{x}\)`
+]
+]
+
+.large[
+where 
+
+.center[
+`\(\overline{x} = \frac{1}{n} \sum_{i=1}^n x_i\)`
+
+`\(\overline{y} = \frac{1}{n} \sum_{i=1}^n y_i\)`
+]
+]
+
+---
+
+### Making predictions
+
+.large[
+Goal: predict a house's sale price using either its year built or its size
+]
+
+![](lecture_06_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+
+.large[
+.question[
+Which of the two variables would you prefer to use?
+]
+]
+
+---
+
+### Making predictions
+
+.large[
+.center[
+`\(SSE = \sum_{i=1}^n (y_i - \widehat{y}_i)^2\)`
+]
+]
+
+![](lecture_06_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+
+.pull-left[
+.large[
+SSE: `\(3.41 \times 10^{12}\)`
+]
+]
+
+.pull-right[
+.large[
+SSE: `\(1.74 \times 10^{12}\)`
+]
+]
+
+.large[
+SSE measures how close, overall, our predictions are to the observed response!
+]
+
+---
+
+### Making predictions
+
+.large[
+.center[
+`\(SSE = \sum_{i=1}^n (y_i - \widehat{y}_i)^2\)`
+]
+]
+
+![](lecture_06_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+.pull-left[
+.large[
+SSE: `\(3.41 \times 10^{12}\)`
+]
+]
+
+.pull-right[
+.large[
+SSE: `\(1.74 \times 10^{12}\)`
+]
+]
+
+.large[
+.question[
+Why are these numbers so *large*?
+]
+]
+
+---
+
+### Making predictions
+
+.large[
+.center[
+`\(SSE = \sum_{i=1}^n (y_i - \widehat{y}_i)^2\)`
+]
+]
+
+.large[
+* Depends on the scale of the response variable
+* Depends on the *number* of observations
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
