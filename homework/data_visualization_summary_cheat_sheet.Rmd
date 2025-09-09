@@ -23,6 +23,41 @@ my_data <- read_csv("...")
 
 where you will fill in the `...` with the path to your CSV file. 
 
+*What is a file path?* The file path is the location of the file on your computer. It includes the directory (Downloads, Desktop, Documents, etc.) in which the file is saved, and the name of the file. For example, suppose I download a CSV file called `cool_data.csv`. This file was probably saved to my downloads, so I would read it in like this:
+
+* On Mac:
+
+```{r, eval=F}
+my_data <- read_csv("~/Downloads/cool_data.csv")
+```
+
+* On Windows it might look something like this:
+
+```{r, eval=F}
+my_data <- read_csv("C:/Users/YourUser/Downloads/cool_data.csv")
+```
+
+If you moved the file somewhere else (such as your Desktop), then the file path will change! For example, if I moved the CSV to the Desktop:
+
+* On Mac:
+
+```{r, eval=F}
+my_data <- read_csv("~/Desktop/cool_data.csv")
+```
+
+* On Windows it might look something like this:
+
+```{r, eval=F}
+my_data <- read_csv("C:/Users/YourUser/Desktop/cool_data.csv")
+```
+
+### What if I downloaded an Excel file?
+
+Data in an Excel file will likely have a `.xlsx` file extension (rather than a `.csv`). You can either save the Excel file as a CSV, or you can do the following:
+
+* Install the `readxl` package
+* Replace `read_csv` with `read_excel` in the code above
+
 
 # Types of variables
 
