@@ -1,0 +1,33 @@
+---
+title: "Communication exercise 2"
+format: pdf
+editor: source
+---
+
+\vspace{-2.5cm}
+
+**Name:**
+
+**Instructions:** Complete the following activity individually, then we will discuss as a class.
+
+## Activity
+
+**Context:** You are a statistical consultant, and a client reaches out to you to ask about some data they have collected. The client has data on the amount of time kids spend on their cell phones during school, their score on a critical thinking exam (out of 100), and their high school GPA (out of 4.0).
+
+You fit two models for the client:
+
+* a linear regression model with phone time as the explanatory variable, and exam score as the response
+* a linear regression model with phone time as the explanatory variable, and GPA as the response
+
+**Client's email:**
+
+> In your first model, you reported an SSE of 2500, and in your second model you reported an SSE of 25. I think I remember that lower SSE values are better. This means that the second model is better, right?
+
+**Your task:** Write a short email to your client below, answering their question.
+
+
+
+
+
+
+
