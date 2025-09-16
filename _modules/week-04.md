@@ -7,7 +7,8 @@ September 15
   : [Slides](https://sta112-f25.github.io/slides/lecture_09.pdf), [Class activity](https://sta112-f25.github.io/class_activities/ca_09.html)
 
 September 17
-: Assumptions and diagnostics
+: Diagnostics and transformations
+  : [Slides](https://sta112-f25.github.io/slides/lecture_10.pdf), [Class activity](https://sta112-f25.github.io/class_activities/ca_10.pdf)
 
 : Reading for Friday's class
   : Textbook 1.4
