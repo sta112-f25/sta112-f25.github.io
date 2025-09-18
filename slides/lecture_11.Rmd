@@ -1,0 +1,578 @@
+---
+title: Nonlinear relationships and transformations
+output:
+  xaringan::moon_reader:
+    css: "lab-slides.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### Last time: Class activity
+
+.large[
+$$\widehat{\text{LifeExpectancy}} = 4.95 + 7.20 \log(\text{GDP per capita})$$
+
+.question[
+What is the predicted price for GDP per capita of $20200?
+]
+]
+
+---
+
+### Class activity
+
+.large[
+$$\widehat{\text{LifeExpectancy}} = 4.95 + 7.20 \log(\text{GDP per capita})$$
+
+* When GDP per capita = 20000: $\widehat{\text{LifeExpectancy}} = 76.255$
+* When GDP per capita = 20200: $\widehat{\text{LifeExpectancy}} = 76.327$
+
+Change:
+]
+
+---
+
+### Class activity
+
+.large[
+$$\widehat{\log(\text{Price})} = 10.51 + 0.091 \ \text{Area}$$
+
+* Price in $, Area in hundres of sq ft
+]
+
+.large[
+.question[
+What is the predicted price for a house of 2100 square feet?
+]
+]
+
+---
+
+### Class activity
+
+.large[
+$$\widehat{\log(\text{Price})} = 10.51 + 0.091 \ \text{Area}$$
+
+* Price in $, Area in hundres of sq ft
+* When Area = 20: $\widehat{\text{Price}} = 226386$
+* When Area = 21: $\widehat{\text{Price}} = 247954$
+
+Change:
+]
+
+---
+
+### Class activity
+
+.large[
+$$\widehat{\log(\text{Price})} = 10.51 + 0.091 \ \text{Area}$$
+
+* Price in $, Area in hundres of sq ft
+* When Area = 20: $\widehat{\text{Price}} = 226386$
+* When Area = 21: $\widehat{\text{Price}} = 247954$
+
+Change: $\dfrac{247954}{226386} = 1.095 = e^{0.091}$
+]
+
+
+---
+
+### More transformations
+
+
+```{r, echo=F, message=F, warning=F, fig.width=10, fig.height=5}
+library(tidyverse)
+library(Stat2Data)
+library(gridExtra)
+
+data("SpeciesArea")
+
+p1 <- SpeciesArea |>
+  ggplot(aes(x = Area, y = Species)) +
+  geom_point() +
+  theme_bw() +
+  labs(x = "Area (sq km)", y = "Number of species") +
+  theme(text = element_text(size = 20)) +
+  geom_smooth(se=F, method="lm")
+
+m1 <- lm(Species ~ Area, data = SpeciesArea)
+
+p2 <- data.frame(preds = predict(m1), 
+                 resids = residuals(m1)) |>
+  ggplot(aes(x = preds, y = resids)) +
+  geom_point() +
+  geom_abline(slope = 0, intercept = 0, color="blue") +
+  theme_bw() +
+  labs(x = "Predicted number of species", y = "Residuals", 
+       title = "Residual plot") +
+  theme(text = element_text(size = 20))
+
+grid.arrange(p1, p2, ncol=2)
+```
+
+.large[
+.question[
+What transformations could we try here?
+]
+]
+
+---
+
+### Trying some transformations
+
+```{r, echo=F, message=F, fig.width=8, fig.height=7, fig.align='center'}
+p1 <- SpeciesArea |>
+  ggplot(aes(x = log(Area), y = Species)) +
+  geom_point() +
+  theme_bw() +
+  labs(x = "log(Area)", y = "Number of species") +
+  theme(text = element_text(size = 20)) +
+  geom_smooth(se=F, method="lm")
+
+m1 <- lm(Species ~ log(Area), data = SpeciesArea)
+
+p2 <- data.frame(preds = predict(m1), 
+                 resids = residuals(m1)) |>
+  ggplot(aes(x = preds, y = resids)) +
+  geom_point() +
+  geom_abline(slope = 0, intercept = 0, color="blue") +
+  theme_bw() +
+  labs(x = "Predicted number of species", y = "Residuals") +
+  theme(text = element_text(size = 20))
+
+
+p3 <- SpeciesArea |>
+  ggplot(aes(x = sqrt(Area), y = Species)) +
+  geom_point() +
+  theme_bw() +
+  labs(x = "sqrt(Area)", y = "Number of species") +
+  theme(text = element_text(size = 20)) +
+  geom_smooth(se=F, method="lm")
+
+m1 <- lm(Species ~ sqrt(Area), data = SpeciesArea)
+
+p4 <- data.frame(preds = predict(m1), 
+                 resids = residuals(m1)) |>
+  ggplot(aes(x = preds, y = resids)) +
+  geom_point() +
+  geom_abline(slope = 0, intercept = 0, color="blue") +
+  theme_bw() +
+  labs(x = "Predicted number of species", y = "Residuals") +
+  theme(text = element_text(size = 20))
+
+
+
+grid.arrange(p1, p2, p3, p4, ncol=2)
+```
+
+---
+
+### Transform both predictor and response?
+
+.large[
+$$\log(Species) = \beta_0 + \beta_1 \log(Area) + \varepsilon$$
+]
+
+```{r, echo=F, message=F, warning=F, fig.width=10, fig.height=5}
+p1 <- SpeciesArea |>
+  ggplot(aes(x = log(Area), y = log(Species))) +
+  geom_point() +
+  theme_bw() +
+  labs(x = "log(Area)", y = "log(Number of species)") +
+  theme(text = element_text(size = 20)) +
+  geom_smooth(se=F, method="lm")
+
+m1 <- lm(log(Species) ~ log(Area), data = SpeciesArea)
+
+p2 <- data.frame(preds = predict(m1), 
+                 resids = residuals(m1)) |>
+  ggplot(aes(x = preds, y = resids)) +
+  geom_point() +
+  geom_abline(slope = 0, intercept = 0, color="blue") +
+  theme_bw() +
+  labs(x = "Predicted number of species", y = "Residuals") +
+  theme(text = element_text(size = 20))
+
+grid.arrange(p1, p2, ncol=2)
+```
+
+---
+
+### Interpreting the fitted model
+
+.large[
+$$\widehat{\log(Species)} = 1.625 + 0.246 \log (Area)$$
+]
+
+---
+
+### Summary of model interpretation so far
+
+$\widehat{y} = \widehat{\beta}_0 + \widehat{\beta}_1 x$
+
+* A one-unit increase in $x$ is associated with a change in $y$ of $\widehat{\beta}_1$, on average
+
+$\widehat{y} = \widehat{\beta}_0 + \widehat{\beta}_1 log(x)$
+
+* A 1% increase in $x$ is associated with a change in $y$ of $\widehat{\beta}_1/100$, on average
+
+$\widehat{log(y)} = \widehat{\beta}_0 + \widehat{\beta}_1 x$
+
+* A one-unit increase in $x$ is associated with a change in $y$ by a **factor** of $e^{\widehat{\beta}_1}$, on average
+
+$\widehat{log(y)} = \widehat{\beta}_0 + \widehat{\beta}_1 log(x)$
+
+* A 1% increase in $x$ is associated with a change in $y$ by a **factor** of $e^{\widehat{\beta}_1}$, on average
+
+
+---
+
+### Kentucky Derby data
+
+.large[
+Data on the Kentucky Derby winner from each year between 1875 and 2012. Variables include
+
+* `year`: year of race
+* `speed`: speed of winning horse (mph)
+* `time`: winning time (seconds)
+* `condition`: condition of the track on the day of the race
+]
+
+---
+
+### EDA
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width=7, fig.height=5}
+library(tidyverse)
+derby <- read.delim("https://sta112-s22.github.io/slides/KYDerby17.txt")
+
+derby %>%
+  ggplot(aes(x = Year, y = Time)) +
+  geom_point(size = 2.5) +
+  geom_line() +
+  theme_bw() +
+  theme(text = element_text(size = 25))
+```
+
+.large[
+.question[
+What do you notice about the winning times?
+]
+]
+
+---
+
+### EDA
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width=7, fig.height=5}
+library(tidyverse)
+derby <- read.delim("https://sta112-s22.github.io/slides/KYDerby17.txt")
+
+derby %>%
+  ggplot(aes(x = Year, y = Time)) +
+  geom_point(size = 2.5) +
+  geom_line() +
+  theme_bw() +
+  theme(text = element_text(size = 25))
+
+derby <- derby |> filter(Year > 1900)
+```
+
+.large[
+.question[
+What do you notice about the winning times?
+]
+]
+
+.large[
+There's a big drop around 1900, then they decrease gradually.
+]
+
+---
+
+### EDA
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width=7, fig.height=5}
+
+derby %>%
+  ggplot(aes(x = Year, y = speed)) +
+  geom_point(size = 2.5) +
+  theme_bw() +
+  theme(text = element_text(size = 25))
+```
+
+.large[
+.question[
+How would you describe the relationship?
+]
+]
+
+---
+
+### Fitting a linear regression
+
+.large[
+$$\text{Speed} = \beta_0 + \beta_1 \ \text{Year} + \varepsilon$$
+]
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width=10, fig.height=5}
+
+p1 <- derby %>%
+  ggplot(aes(x = Year, y = speed)) +
+  geom_point(size = 2.5) +
+  geom_smooth(se=F, method="lm") +
+  theme_bw() +
+  theme(text = element_text(size = 20))
+
+derby_lm <- lm(speed ~ Year, data = derby)
+
+p2 <- derby %>%
+  mutate(pred = predict(derby_lm),
+         resid = residuals(derby_lm)) %>%
+  ggplot(aes(x = pred, y = resid)) +
+  geom_point(size = 2.5) +
+  geom_abline(slope = 0, intercept = 0, color = "blue", lwd=1.2) +
+  labs(x = "Predicted speed", y = "Residual") +
+  theme_bw() +
+  theme(text = element_text(size = 20))
+
+grid.arrange(p1, p2, ncol=2)
+```
+
+---
+
+### Polynomial transformations
+
+.large[
+Another possible transformation is a **polynomial**.
+
+.question[
+**Definition:** A polynomial transformation of order $k$ is a linear combination of the terms $X$, $X^2$, ..., $X^k$:
+$$Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \cdots + \beta_k X^k + \varepsilon$$
+]
+]
+
+.large[
+* Example: If we use a polynomial of order 3, our model is 
+$$Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \beta_3 X^3 + \varepsilon$$
+]
+
+---
+
+### Polynomial transformations
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width=7, fig.height=5}
+
+derby %>%
+  ggplot(aes(x = Year, y = speed)) +
+  geom_point(size = 2.5) +
+  theme_bw() +
+  theme(text = element_text(size = 25))
+```
+
+.large[
+.question[
+What order polynomial do you think we should use?
+]
+]
+
+---
+
+### Polynomial transformation
+
+.large[
+Let's try a polynomial of order 2:
+
+$$\text{Speed} = \beta_0 + \beta_1 \ \text{Year} +  \beta_2 \ \text{Year}^2 + \varepsilon$$
+]
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width=7, fig.height=5}
+
+derby %>%
+  ggplot(aes(x = Year, y = speed)) +
+  geom_point(size = 2.5) +
+  geom_smooth(se=F, method="lm", formula = y ~ I(x) + I(x^2), lwd=1.2) +
+  theme_bw() +
+  theme(text = element_text(size = 25))
+```
+
+---
+
+### Diagnostic plots
+
+.large[
+We use residual plots to check the model assumptions after transforming our predictor, just like with other transformations.
+]
+
+```{r echo=F, message=F, warning=F, fig.align='center', fig.width=6, fig.height=4}
+
+derby_lm <- lm(speed ~ I(Year) + I(Year^2), data = derby)
+
+derby %>%
+  mutate(pred = predict(derby_lm),
+         resid = residuals(derby_lm)) %>%
+  ggplot(aes(x = pred, y = resid)) +
+  geom_point(size = 2.5) +
+  geom_abline(slope = 0, intercept = 0, color = "blue", lwd=1.2) +
+  labs(x = "Predicted speed", y = "Residual") +
+  theme_bw() +
+  theme(text = element_text(size = 25))
+```
+
+.large[
+.question[
+How does the shape assumption look now?
+]
+]
+
+---
+
+### Fitting the model in R
+
+.large[
+```{r eval=F}
+derby_lm <- lm(speed ~ poly(Year, 2, raw=TRUE), 
+               data = derby)
+```
+]
+
+.large[
+* `poly` means "fit a polynomial"
+* `poly(..., 2, ...)` specifies a second-order polynomial (quadratic)
+]
+
+---
+
+### Fitting the model in R
+
+.large[
+```{r}
+derby_lm <- lm(speed ~ poly(Year, 2, raw=TRUE), 
+               data = derby)
+derby_lm
+```
+]
+
+.large[
+$$\widehat{\text{Speed}} = -1120 + 1.16 \ \text{Year} - 0.00029 \ \text{Year}^2$$
+]
+
+---
+
+### Interpreting the fitted model
+
+.large[
+$$\widehat{\text{Speed}} = -1120 + 1.16 \ \text{Year} - 0.00029 \ \text{Year}^2$$
+]
+
+.large[
+.question[
+How would I interpret the intercept of the fitted polynomial regression model?
+]
+]
+
+---
+
+### Interpreting the fitted model
+
+.large[
+$$\widehat{\text{Speed}} = -1120 + 1.16 \ \text{Year} - 0.00029 \ \text{Year}^2$$
+]
+
+.large[
+.question[
+How would I interpret the intercept of the fitted polynomial regression model?
+]
+]
+
+.large[
+If Year = 0, we predict a speed of -1120 mph (doesn't make much sense, since year is nowhere near 0)
+]
+
+---
+
+### Interpreting the fitted model
+
+.large[
+$$\widehat{\text{Speed}} = -1120 + 1.16 \ \text{Year} - 0.00029 \ \text{Year}^2$$
+]
+
+.large[
+.question[
+How would I interpret the terms on $\text{Year}$ and $\text{Year}^2$?
+]
+]
+
+---
+
+### Interpreting the fitted model
+
+.large[
+$$\widehat{\text{Speed}} = -1120 + 1.16 \ \text{Year} - 0.00029 \ \text{Year}^2$$
+]
+
+.large[
+.question[
+How would I interpret the terms on $\text{Year}$ and $\text{Year}^2$?
+]
+]
+
+.large[
+They're kind of difficult to interpret -- if I change $\text{Year}$, I also change $\text{Year}^2$
+]
+
+---
+
+### Interpreting the fitted model
+
+.large[
+$$\widehat{\text{Speed}} = -1120 + 1.16 \ \text{Year} - 0.00029 \ \text{Year}^2$$
+]
+
+.large[
+.question[
+Can I interpret the *sign* on $\text{Year}^2$?
+]
+]
+
+---
+
+### Interpreting the fitted model
+
+.large[
+$$\widehat{\text{Speed}} = -1120 + 1.16 \ \text{Year} - 0.00029 \ \text{Year}^2$$
+]
+
+.large[
+.question[
+Can I interpret the *sign* on $\text{Year}^2$?
+]
+]
+
+.large[
+Yes (for a polynomial of order 2 specifically). The sign on $\text{Year}^2$ tells us about the concavity of the relationship.
+]
+
+---
+
+### Class activity
+
+.large[
+[https://sta112-f25.github.io/class_activities/ca_11.html](https://sta112-f25.github.io/class_activities/ca_11.html)
+]
+
+.large[
+* Experiment with polynomial regression
+* Submit HTML at end of class
+]
+
+
+
+
+
+
