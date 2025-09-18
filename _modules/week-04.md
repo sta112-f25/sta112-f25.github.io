@@ -15,6 +15,10 @@ September 17
 
 September 19
 : Transformations
+  : [Slides](https://sta112-f25.github.io/slides/lecture_11.pdf), [Class activity](https://sta112-f25.github.io/class_activities/ca_11.html)
 
 : Reading for Monday's class
   : Textbook 2.1
+  
+: **HW 3 released**{: .label .label-yellow }
+  : [HW 3](https://sta112-f25.github.io/homework/hw_3.html)

@@ -1,0 +1,23 @@
+---
+---
+---
+title: "Homework 3"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+editor: source
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+bryozoan <- read_csv("https://sta112-f25.github.io/homework/bryozoan_data.csv")
+```
+
+### Question 1
+
+(Type your answer to question 1 here)
+
+
+(Add answers to the remaining questions below)
