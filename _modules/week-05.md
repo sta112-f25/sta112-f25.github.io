@@ -10,9 +10,7 @@ September 22
 
 September 24
 : Inference for regression slope
-
-: Reading for Friday's class:
-  : Textbook 4.7
+  : [Slides](https://sta112-f25.github.io/slides/lecture_12.pdf), [Class activity](https://sta112-f25.github.io/class_activities/ca_12.pdf)
 
 September 26
-: Inference with bootstrap samples
+: Inference for regression slope
