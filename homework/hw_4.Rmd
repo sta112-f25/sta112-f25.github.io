@@ -187,7 +187,7 @@ sqrt(family_income)   0.9532     0.2291
 :::{.question}
 #### Question 2
 
-Using the R output corresponding to your model from question 1, write down the equation of your *fitted* regression model.
+Using the R output corresponding to your model from question 1, write down the equation of your *fitted* regression model, and interpret the estimated slope in context.
 :::
 
 ### Inference
