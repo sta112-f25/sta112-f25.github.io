@@ -15,3 +15,6 @@ September 24
 September 26
 : Inference for regression slope
   : [Slides](https://sta112-f25.github.io/slides/lecture_13.pdf), [Class activity 1](https://sta112-f25.github.io/class_activities/ca_13.pdf), [Class activity 2](https://sta112-f25.github.io/class_activities/ca_13_2.pdf)
+  
+: **HW 4 released**{: .label .label-yellow }
+  : [HW 4](https://sta112-f25.github.io/homework/hw_4.html)
