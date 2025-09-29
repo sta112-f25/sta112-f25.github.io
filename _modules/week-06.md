@@ -1,18 +1,13 @@
 ---
-title: Wrapping up simple linear regression
+title: Regression with a categorical predictor
 ---
 
 September 29
-: Outliers and influential points
+: Inference and diagnostics
+  : [Slides](https://sta112-f25.github.io/slides/lecture_14.pdf), [Class activity](https://sta112-f25.github.io/class_activities/ca_14.html)
 
 October 1
-: SLR wrap-up
-
-: Reading for Friday's class
-  : Textbook 3.4
+: Regression with a categorical predictor
 
 October 3
-: Polynomial regression
-
-: Reading for Monday's class
-  : Textbook 4.5
+: Regression with a categorical predictor
