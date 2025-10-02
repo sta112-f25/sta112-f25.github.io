@@ -15,4 +15,5 @@ October 1
 
 
 October 3
-: Regression with a categorical predictor
+: Regression with a categorical predictor, R-squared
+  : [Slides](https://sta112-f25.github.io/slides/lecture_16.pdf), [Class activity](https://sta112-f25.github.io/class_activities/ca_16.html)
