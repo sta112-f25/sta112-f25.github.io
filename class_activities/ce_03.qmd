@@ -1,0 +1,37 @@
+---
+title: "Communication exercise 3"
+format: 
+  pdf:
+    include-in-header: 
+      text: '\pagenumbering{gobble}'
+editor: source
+---
+
+\vspace{-2.5cm}
+
+**Name:**
+
+**Instructions:** Complete the following activity individually, then we will discuss as a class.
+
+## Activity
+
+**Context:** You are a statistical consultant, and a client reaches out to you to ask about some data they have collected. The client has data on the amount of time kids spend on their cell phones during school, their score on a critical thinking exam (out of 100), and their high school GPA (out of 4.0).
+
+You fit a linear regression model for the client, with phone time as the explanatory variable, and exam score as the response. Using your fitted model, you also performed a hypothesis test; your null hypothesis was that there is no relationship between phone time and exam score, while the alternative hypothesis was that there is a negative relationship. The p-value for your hypothesis test was 0.003.
+
+Your friend -- who has taken two statistics courses -- is working with the same data, and drafts a conclusion to send to the client, which includes the following sentence:
+
+**Friend's draft:** 
+
+> The p-value for the hypothesis test was 0.003. That is, there is only a 0.3% chance that there is no relationship between phone time and exam score.
+
+**Task 1:** Your friend has made a mistake in their interpretation. Write a short email to your *friend* below, explaining their mistake.
+
+**Task 2:** Correct your friend's draft to the client below.
+
+
+
+
+
+
+

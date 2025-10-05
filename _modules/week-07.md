@@ -1,9 +1,10 @@
 ---
-title: Introducing categorical predictors, exam 1
+title: Exam 1
 ---
 
 October 6
-: Regression with a categorical predictor
+: Exploring outliers
+  : [activity](https://sta112-f25.github.io/class_activities/ca_17.html)
 
 October 8
 : Exam 1 review
