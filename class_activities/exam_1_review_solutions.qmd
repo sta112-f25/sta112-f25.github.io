@@ -1,5 +1,5 @@
 ---
-title: "Exam 1 review questions"
+title: "Exam 1 review solutions"
 format: html
 ---
 
@@ -18,6 +18,8 @@ Below are questions to help you study for Exam 1. These are some examples of the
     (c) $SSE = \dfrac{\sum \limits_{i=1}^n (x_i - \overline{x})(y_i - \overline{y})}{\sum \limits_{i=1}^n (x_i - \overline{x})^2}$
     (d) $SSE = \sum \limits_{i=1}^n (y_i - x_i)^2$
     (e) $SSE = \sum \limits_{i=1}^n (y_i - \overline{y})^2$
+    
+**Solution:** (a)
     
 <br/>
 
@@ -47,6 +49,8 @@ data.frame(pred = sim_reg$fitted.values,
   theme_bw() 
 ```
 
+**Solution:** (b)
+
 <br/>
 
 3. How do you assess the *randomness* assumption for a linear regression model?
@@ -56,13 +60,32 @@ data.frame(pred = sim_reg$fitted.values,
     (d) Look at a scatterplot and check if the variables are correlated
     (e) Think about the data generating process -- do the data come from a random process, like a random sample or randomized experiment?
     
+**Solution:** (e)
+    
 <br/>
 
 ## Short answer questions
 
 4. Describe how we check for outliers and influential points when fitting a linear regression model.
 
+**Solution:** First, look for potential outliers by calculating studentized residuals for each observation, and making a studentized residual plot. Studentized residuals below -3 or above 3 are particularly unusual points. Once we have identified potential outliers, we should investigate whether the unusual observations are errors, or below to a different population than our population of interest. If the observations are not clearly errors, and do not clearly belong to a different population, then we report our results both *with* and *without* the potential outliers.
+
 5. Sketch a hypothetical scatterplot between two variables, $X$ and $Y$, which includes an *influential* outlier. Make sure to highlight which is the influential outlier.
+
+**Solution:** In the plot below, the point at (5, 2) is an influential outlier.
+
+```{r echo=F}
+set.seed(3)
+x <- rnorm(100)
+y <- 1 + x + rnorm(100)
+x[1] <- 5
+y[1] <- 2
+data.frame(x, y) |>
+  ggplot(aes(x = x, y = y)) +
+  geom_point() +
+  theme_bw()
+```
+
 
 6. Sketch a hypothetical scatterplot between two variables, $X$ and $Y$, which includes an outlier that is *not* influential. Make sure to highlight point is the non-influential outlier.
 
@@ -94,7 +117,7 @@ The scatterplot below plots Distance and Price for the sample of 104 homes.
 RailsTrails %>%
   ggplot(aes(x = Distance, y = Price2014)) +
   geom_point(size=2) +
-  labs(x = "Distance (miles)", y = "Price ($1000's)") +
+  labs(x = "Distance (feet)", y = "Price ($1000's)") +
   theme_bw() +
   theme(text = element_text(size=20))
 ```
