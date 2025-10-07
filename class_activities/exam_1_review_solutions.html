@@ -149,7 +149,7 @@ window.Quarto = {
 <ol start="4" type="1">
 <li>Describe how we check for outliers and influential points when fitting a linear regression model.</li>
 </ol>
-<p><strong>Solution:</strong> First, look for potential outliers by calculating studentized residuals for each observation, and making a studentized residual plot. Studentized residuals below -3 or above 3 are particularly unusual points. Once we have identified potential outliers, we should investigate whether the unusual observations are errors, or below to a different population than our population of interest. If the observations are not clearly errors, and do not clearly belong to a different population, then we report our results both <em>with</em> and <em>without</em> the potential outliers.</p>
+<p><strong>Solution:</strong> First, look for potential outliers by calculating studentized residuals for each observation, and making a studentized residual plot. Studentized residuals below -3 or above 3 are particularly unusual points. Once we have identified potential outliers, we should investigate whether the unusual observations are errors, or belong to a different population than our population of interest. If the observations are not clearly errors, and do not clearly belong to a different population, then we report our results both <em>with</em> and <em>without</em> the potential outliers.</p>
 <ol start="5" type="1">
 <li>Sketch a hypothetical scatterplot between two variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, which includes an <em>influential</em> outlier. Make sure to highlight which is the influential outlier.</li>
 </ol>
@@ -164,10 +164,46 @@ window.Quarto = {
 </div>
 </div>
 <ol start="6" type="1">
-<li><p>Sketch a hypothetical scatterplot between two variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, which includes an outlier that is <em>not</em> influential. Make sure to highlight point is the non-influential outlier.</p></li>
-<li><p>Sketch a hypothetical scatterplot between two variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, which suggests that a <em>log</em> transformation on <span class="math inline">\(X\)</span> may be needed.</p></li>
-<li><p>Sketch a hypothetical scatterplot between two variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, which suggests that a polynomial fit of order 2 may be needed.</p></li>
-<li><p>Your friend Marisa, who lives in Minneapolis, Minnesota, visits the “spurious correlations” website from class, and finds a correlation of 0.887 between the “popularity of the first name Marisa” and the “number of robberies in Minnesota”.</p>
+<li>Sketch a hypothetical scatterplot between two variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, which includes an outlier that is <em>not</em> influential. Make sure to highlight point is the non-influential outlier.</li>
+</ol>
+<p><strong>Solution:</strong> In the scatterplot below, the point at (5, 6) is a non-influential outlier.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="7" type="1">
+<li>Sketch a hypothetical scatterplot between two variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, which suggests that a <em>log</em> transformation on <span class="math inline">\(X\)</span> may be needed.</li>
+</ol>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="8" type="1">
+<li>Sketch a hypothetical scatterplot between two variables, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, which suggests that a polynomial fit of order 2 may be needed.</li>
+</ol>
+<p><strong>Solution:</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="9" type="1">
+<li>Your friend Marisa, who lives in Minneapolis, Minnesota, visits the “spurious correlations” website from class, and finds a correlation of 0.887 between the “popularity of the first name Marisa” and the “number of robberies in Minnesota”.
 <ul>
 <li>Explain why this is a “spurious” correlation</li>
 <li>Should your friend be more worried about getting robbed?</li>
@@ -186,7 +222,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -200,39 +236,87 @@ Distance      -53.01      10.44  </code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 <ol start="10" type="1">
-<li><p>Write down the population linear regression model for the relationship between Distance and Price in the population.</p></li>
-<li><p>Using the R output above, write the equation of the fitted regression line which predicts Price from Distance.</p></li>
-<li><p>Interpret the estimated slope, in context of the data.</p></li>
-<li><p>Use the estimated regression line to predict the price for two houses: one which is 0.5 miles from a bike trail, and one which is 2 miles from a bike trail.</p></li>
-<li><p>The true selling prices for the two houses are unlikely to be exactly equal to our predictions. Based on the residual plot, which of the two houses do you think will have a sale price closer its prediction from Question 13? Explain your reasoning.</p></li>
-<li><p>Use the residual plot to assess the shape and constant variance assumptions. Do these two assumptions look reasonable? Explain.</p></li>
-<li><p>The residual sum of squares, SSE, for the fitted model is 1010912. Calculate and interpret the RMSE in context of the data.</p></li>
-<li><p>Calculate the <em>residual</em> and <em>studentized residual</em> for a house with distance 0.46 miles and price $879,330. The standard deviation of the residuals, ignoring this house, is 99.</p></li>
+<li>Write down the population linear regression model for the relationship between Distance and Price in the population.</li>
 </ol>
+<p><strong>Solution:</strong></p>
+<p><span class="math display">\[\text{Price} = \beta_0 + \beta_1 \text{Distance} + \varepsilon\]</span></p>
+<ol start="11" type="1">
+<li>Using the R output above, write the equation of the fitted regression line which predicts Price from Distance.</li>
+</ol>
+<p><strong>Solution:</strong></p>
+<p><span class="math display">\[\widehat{\text{Price}} = 352.16 -53.01 \ \text{Distance}\]</span></p>
+<ol start="12" type="1">
+<li>Interpret the estimated slope, in context of the data.</li>
+</ol>
+<p><strong>Solution:</strong> An increase of one mile in Distance to the nearest bike trail is associated with a decrease in the house price by about $53,010 on average</p>
+<ol start="13" type="1">
+<li>Use the estimated regression line to predict the price for two houses: one which is 0.5 miles from a bike trail, and one which is 2 miles from a bike trail.</li>
+</ol>
+<p><strong>Solution:</strong></p>
+<ul>
+<li><p>For the house which is 0.5 miles away: <span class="math inline">\(352.16 -53.01(0.5) = 325.655\)</span>, so our estimated price is $325,655</p></li>
+<li><p>For the house which is 2 miles away: <span class="math inline">\(352.16 -53.01(2) = 246.14\)</span>, so our estimated price is $246,140</p></li>
+</ul>
+<ol start="14" type="1">
+<li>The true selling prices for the two houses are unlikely to be exactly equal to our predictions. Based on the residual plot, which of the two houses do you think will have a sale price closer its prediction from Question 13? Explain your reasoning.</li>
+</ol>
+<p><strong>Solution:</strong> There is much more variability in price with shorter distances than with further distances, so the house which is 2 miles away is likely to have a sale price closer to our prediction.</p>
+<ol start="15" type="1">
+<li>Use the residual plot to assess the shape and constant variance assumptions. Do these two assumptions look reasonable? Explain.</li>
+</ol>
+<p><strong>Solution:</strong> The residuals appear to be scattered randomly around the horizontal line at 0, with no clear pattern (i.e., no areas where most of the residuals are above the line, or most of the residuals are below); this suggests that the shape assumption is reasonable. However, we can see that the variability of the residuals increases with the predicted price, so the constant variance assumption is not satisfied.</p>
+<ol start="16" type="1">
+<li>The residual sum of squares, SSE, for the fitted model is 1010912. Calculate and interpret the RMSE in context of the data.</li>
+</ol>
+<p><strong>Solution:</strong> <span class="math inline">\(RMSE = \sqrt{\frac{1}{n} SSE}\)</span>. Here <span class="math inline">\(n = 104\)</span>, so <span class="math inline">\(RMSE = \sqrt{ \frac{1}{104} (1010912)} = 98.59\)</span>. That is, our predicted sales prices tend to be around $98,590 from the true sales prices. (However, note that the variance is non constant, so predictions for greater distances will tend to be closer to the truth than predictions for shorter distances).</p>
+<ol start="17" type="1">
+<li>Calculate the <em>residual</em> and <em>studentized residual</em> for a house with distance 0.46 miles and price $879,330. The standard deviation of the residuals, ignoring this house, is 99.</li>
+</ol>
+<p><strong>Solution:</strong></p>
+<ul>
+<li>Prediction: <span class="math inline">\(352.16 -53.01(0.46) = 327.775\)</span></li>
+<li>Residual: <span class="math inline">\(879.330 - 327.775 = 551.555\)</span></li>
+<li>Studentized residual: <span class="math inline">\(\dfrac{551.555}{99} = 5.571\)</span></li>
+</ul>
 <section id="inference" class="level3">
 <h3 class="anchored" data-anchor-id="inference">Inference</h3>
 <ol start="18" type="1">
-<li><p>Construct and interpret a 98% confidence interval for the true change in price associated with an increase of 1 mile in distance from the nearest bike trail. The critical value is <span class="math inline">\(t^* = 2.36\)</span>.</p></li>
-<li><p>What does “98% confident” mean?</p></li>
+<li>Construct and interpret a 98% confidence interval for the true change in price associated with an increase of 1 mile in distance from the nearest bike trail. The critical value is <span class="math inline">\(t^* = 2.36\)</span>.</li>
 </ol>
+<p><strong>Solution:</strong> What we need here is a 98% confidence interval for the true slope <span class="math inline">\(\beta_1\)</span>. Recall that our confidence interval is</p>
+<p><span class="math display">\[\widehat{\beta}_1 \pm t^* SE_{\widehat{\beta}_1}\]</span></p>
+<p>Our estimated slope is <span class="math inline">\(-53.01\)</span> and the standard error is <span class="math inline">\(10.44\)</span>, so our 98% confidence interval is</p>
+<p><span class="math display">\[-53.01 \pm 2.36 (10.44) = (-77.648, -28.372)\]</span></p>
+<p>That is, we are 98% confident that a one-mile increase in distance from the nearest bike trail is associated with a decrease in the sale price of between $28,372 and $77,648, on average.</p>
+<ol start="19" type="1">
+<li>What does “98% confident” mean?</li>
+</ol>
+<p><strong>Solution:</strong> If we were to repeat this process many times (that is: take a sample of houses, record their distance and sales price, fit the model, and construct a confidence interval), then we would expect 98% of the resulting intervals to capture the true slope.</p>
 <p><br></p>
 <p>Your friend wishes to know whether there is a negative relationship between distance to the nearest bike trail, and price.</p>
 <ol start="20" type="1">
-<li><p>Write down null and alternative hypotheses, in terms of one or more model parameters, which allow you to test this research question.</p></li>
-<li><p>Using the R output, calculate and interpret a test statistic for the hypotheses in the previous question. What are the degrees of freedom associated with the distribution of your test statistic?</p></li>
-<li><p>Below is a picture of the appropriate <span class="math inline">\(t\)</span> distribution. Shade the area under the curve corresponding to the p-value for your hypothesis test.</p></li>
+<li>Write down null and alternative hypotheses, in terms of one or more model parameters, which allow you to test this research question.</li>
 </ol>
+<p><strong>Solution:</strong> <span class="math inline">\(H_0: \beta_1 = 0 \hspace{1cm} H_A: \beta_1 &lt; 0\)</span></p>
+<ol start="21" type="1">
+<li>Using the R output, calculate and interpret a test statistic for the hypotheses in the previous question. What are the degrees of freedom associated with the distribution of your test statistic?</li>
+</ol>
+<p><strong>Solution:</strong> <span class="math inline">\(t = \dfrac{-53.01 - 0}{10.44} = -5.078\)</span></p>
+<ol start="22" type="1">
+<li>Below is a picture of the appropriate <span class="math inline">\(t\)</span> distribution. Shade the area under the curve corresponding to the p-value for your hypothesis test.</li>
+</ol>
+<p><strong>Solution:</strong> The shade region is the area under the curve to the left of -5.078. The height of the curve is so close to 0 that the shading doesn’t really show up here.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -246,7 +330,7 @@ Distance      -53.01      10.44  </code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+<p><img src="exam_1_review_solutions_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -259,6 +343,14 @@ Distance      -53.01      10.44  </code></pre>
 <ol start="23" type="1">
 <li>There are no errors in your collaborator’s plots, and they correctly calculated the estimated slope (-0.088) and intercept (3.79) of the fitted regression line. The reported p-value (0.000013) is also correct. Unfortunately, they made several errors in their interpretation of the figures, estimated regression line, and/or p-value. List these errors below, and explain to your collaborator why each of their errors is wrong.</li>
 </ol>
+<p><strong>Solution:</strong> There are several errors:</p>
+<ul>
+<li>Your collaborator has incorrectly interpreted the p-value. The p-value is NOT the probability that the null hypothesis is true. Rather, the p-value is the probability of “our results or more extreme” (in this case, a slope of at least -0.088 or 0.088), <em>if</em> the null hypothesis were true (in this case, no relationship between the variables).</li>
+<li>Your collaborator has incorrectly interpreted the intercept/slope here; they have interpreted the estimated intercept (3.79) as if it were the slope.</li>
+<li>The normality assumption deals with normality of the residuals, <em>not</em> normality of the explanatory variable</li>
+<li>We can’t describe the relationship with a categorical variable as “linear” or “positive” – there isn’t even an inherent ordering to the variable</li>
+<li>The data are observational, but the collaborator is drawing a causal conclusion – they are saying that if a student changes their habits, they will improve their grades (not just that these habits are <em>associated</em> with higher grades)</li>
+</ul>
 </section>
 
 </main>

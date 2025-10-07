@@ -11,7 +11,7 @@ October 1
   : [Slides](https://sta112-f25.github.io/slides/lecture_15.pdf), [Class activity](https://sta112-f25.github.io/class_activities/ca_15.html)
   
 : Exam 1 review questions
-  : [review questions](https://sta112-f25.github.io/class_activities/exam_1_review.html)
+  : [review questions](https://sta112-f25.github.io/class_activities/exam_1_review.html), [review solutions](https://sta112-f25.github.io/class_activities/exam_1_review.html)
 
 
 October 3
