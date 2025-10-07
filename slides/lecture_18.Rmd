@@ -1,0 +1,166 @@
+---
+title: Exam 1 review day
+output:
+  xaringan::moon_reader:
+    css: "lab-slides.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### Reminders and agenda
+
+.large[
+* Exam 1 on Friday
+  * Bring a calculator!
+  * Review questions and solutions on the course website
+* Today:
+  * Quick discussion about outliers activity from Monday
+  * Exam 1 review
+]
+
+---
+
+### Outliers
+
+.large[
+When can we *remove* potential outliers from the data?
+
+* When the observation is a clear error (e.g., a negative value for height)
+* When the observation comes from a different population than our population of interest (e.g., if we want to fit a model about dogs, then we can remove a cat from the data)
+
+In all other situations:
+
+* Report the results (estimated coefficients, confidence intervals, test statistics, etc.) both **with** AND **without** the potential outlier(s)
+]
+
+---
+
+### Last time: exploring outliers
+
+```{r, include=F}
+library(tidyverse)
+library(usdata)
+data("urban_owner")
+
+m1 <- lm(pct_owner_occupied ~ poppct_urban, data = urban_owner)
+```
+
+```{r, echo=F, message=F, warning=F, fig.align='center', fig.width=7, fig.height=5}
+data.frame(studentized_resids = rstudent(m1),
+         yhat = predict(m1)) |>
+  ggplot(aes(x = yhat, y = studentized_resids)) +
+  geom_point() +
+  geom_abline(slope = 0, intercept = 0, 
+              color = "blue", lwd=1.2) +
+  geom_abline(slope = 0, intercept = c(-3, -2, 2, 3),
+              color = "orange", lty = 2, lwd=1.2) +
+  labs(x = "Predicted fraction owning their home",
+       y = "Studentized residuals") +
+  theme_bw() +
+  theme(text = element_text(size = 20))
+```
+
+.large[
+.question[
+What point is the outlier here?
+]
+]
+
+---
+
+### Last time: exploring outliers
+
+.large[
+DC: Percent urban -- 100%, Percent owning home -- 42%
+
+.question[
+Is this observation a clear *error*?
+]
+]
+
+---
+
+### Last time: exploring outliers
+
+.large[
+DC: Percent urban -- 100%, Percent owning home -- 42%
+
+.question[
+Is this observation a clear *error*?
+]
+
+**No** -- these are believable numbers, given what we know about DC
+]
+
+---
+
+### Last time: exploring outliers
+
+.large[
+DC: Percent urban -- 100%, Percent owning home -- 42%
+
+.question[
+Is this observation a clear *error*?
+]
+
+**No** -- these are believable numbers, given what we know about DC
+]
+
+---
+
+### Last time: exploring outliers
+
+.large[
+DC: Percent urban -- 100%, Percent owning home -- 42%
+
+.question[
+Is this observation a clear *error*?
+]
+
+**No** -- these are believable numbers, given what we know about DC
+
+.question[
+Does DC belong to a different population than our population of interest?
+]
+]
+
+---
+
+### Last time: exploring outliers
+
+.large[
+DC: Percent urban -- 100%, Percent owning home -- 42%
+
+.question[
+Is this observation a clear *error*?
+]
+
+**No** -- these are believable numbers, given what we know about DC
+
+.question[
+Does DC belong to a different population than our population of interest?
+]
+
+**Maybe** -- I think you can make an argument either way
+]
+
+---
+
+### Last time: exploring outliers
+
+.large[
+.question[
+How should we handle DC?
+]
+
+* If we think DC does not belong in our population of interest, could remove
+* Otherwise, report results with and without DC
+]
+
+
+

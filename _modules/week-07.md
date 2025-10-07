@@ -8,6 +8,7 @@ October 6
 
 October 8
 : Exam 1 review
+  : [Slides](https://sta112-f25.github.io/slides/lecture_18.pdf)
 
 October 10
 : **Exam 1**{: .label .label-red}
