@@ -90,8 +90,8 @@ Do you think `\(R^2_{adj}\)` will increase or decrease when we add species to th
 
 .large[
 `\begin{align}
-\widehat{\text{bill length}} &amp;= 24.91 + 9.91 \ \text{IsChinstrap} + 3.54 \ \text{IsGentoo} \\
-&amp; \hspace{0.5cm} + 0.0038 \ \text{body mass}
+\widehat{\text{bill length}} &amp;= 24.92 + 9.92 \ \text{IsChinstrap} + 3.56 \ \text{IsGentoo} \\
+&amp; \hspace{0.5cm} + 0.0037 \ \text{body mass}
 \end{align}`
 ]
 
@@ -194,6 +194,156 @@ But when we include Species in the model, we see *positive* relationships betwee
 * The model *without* Species estimates the relationship between culmen length and culmen depth in the population of all Adelie, Chinstrap, and Gentoo penguins
 * The model *with* Species estimates the relationship between culmen length and culmen depth *after accounting for species*
 ]
+
+---
+
+### Two quantitative predictors
+
+.large[
+What if I want to fit a regression model with two *quantitative* predictors, body mass and flipper length?
+
+.question[
+What would the population regression model look like?
+]
+]
+
+---
+
+### Two quantitative predictors
+
+.large[
+What if I want to fit a regression model with two *quantitative* predictors, body mass and flipper length?
+
+.question[
+What would the population regression model look like?
+]
+]
+
+.large[
+`$$\text{bill length} = \beta_0 + \beta_1 \text{body mass} + \beta_2 \text{flipper length} + \varepsilon$$`
+]
+
+---
+
+### Fitting the model
+
+.large[
+
+
+```
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)       -3.4366939  4.5805532  -0.750    0.454    
+body_mass_g        0.0006622  0.0005672   1.168    0.244    
+flipper_length_mm  0.2218655  0.0323484   6.859 3.31e-11 ***
+```
+
+`$$\widehat{\text{bill length}} = -3.44 + 0.00066 \ \text{body mass} + 0.222 \ \text{flipper length}$$`
+]
+
+---
+
+### Interpreting coefficients
+
+.large[
+`$$\widehat{\text{bill length}} = -3.44 + 0.00066 \ \text{body mass} + 0.222 \ \text{flipper length}$$`
+As with a categorical predictor, we get a separate regression line for each flipper length.
+
+.question[
+Suppose a penguin has a flipper length of 200mm. What is the estimated regression line for the relationship between body mass and bill length?
+]
+]
+
+---
+
+### Interpreting coefficients
+
+.large[
+`$$\widehat{\text{bill length}} = -3.44 + 0.00066 \ \text{body mass} + 0.222 \ \text{flipper length}$$`
+As with a categorical predictor, we get a separate regression line for each flipper length.
+
+.question[
+Suppose a penguin has a flipper length of 200mm. What is the estimated regression line for the relationship between body mass and bill length?
+]
+]
+
+.large[
+The estimated regression line is
+
+`\begin{align}
+\widehat{\text{bill length}} &amp;= -3.44 + 0.00066 \ \text{body mass} + 0.222(200) \\
+&amp;= -3.44 + 44.4 + 0.00066 \ \text{body mass} \\
+&amp;= 40.96 + 0.00066 \ \text{body mass}
+\end{align}`
+]
+
+---
+
+### Interpreting coefficients
+
+.large[
+`$$\widehat{\text{bill length}} = -3.44 + 0.00066 \ \text{body mass} + 0.222 \ \text{flipper length}$$`
+]
+
+&lt;img src="lecture_22_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+.question[
+Are longer flippers associated with longer or shorter bills?
+]
+]
+
+---
+
+### Interpreting coefficients
+
+.large[
+`$$\widehat{\text{bill length}} = -3.44 + 0.00066 \ \text{body mass} + 0.222 \ \text{flipper length}$$`
+]
+
+&lt;img src="lecture_22_files/figure-html/unnamed-chunk-17-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+For a fixed body mass, penguins with longer flippers tend to have longer bills.
+]
+
+---
+
+### Interpreting coefficients
+
+.large[
+`$$\widehat{\text{bill length}} = -3.44 + 0.00066 \ \text{body mass} + 0.222 \ \text{flipper length}$$`
+]
+
+&lt;img src="lecture_22_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+.question[
+What does `\(\widehat{\beta}_2 = 0.222\)` mean?
+]
+]
+
+---
+
+### Interpreting coefficients
+
+.large[
+`$$\widehat{\text{bill length}} = -3.44 + 0.00066 \ \text{body mass} + 0.222 \ \text{flipper length}$$`
+]
+
+&lt;img src="lecture_22_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
+
+.large[
+For a fixed body mass, and increase of 1mm in flipper length is associated with an increase of 0.222mm in bill length.
+]
+
+---
+
+### Class Activity
+
+.large[
+Work on the class activity (handout).
+]
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
