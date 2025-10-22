@@ -11,6 +11,7 @@ October 20
 
 October 22
 : Multiple linear regression
+  : [Slides](https://sta112-f25.github.io/slides/lecture_22.pdf), [Class activity](https://sta112-f25.github.io/class_activities/ca_22_handout.pdf)
 
 : Reading for Friday's class
   : Textbook 3.4
