@@ -3,7 +3,7 @@ title: Assumptions and inference
 ---
 
 October 27
-: Assumptions and diagnostics
+: Interactions
   : [Slides](https://sta112-f25.github.io/slides/lecture_24.pdf)
 
 : Reading for Wednesday's class
