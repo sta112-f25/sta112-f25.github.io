@@ -1,0 +1,172 @@
+---
+title: "Project Part 3"
+output: 
+  rmdformats::robobook:
+    css: "homework.css"
+    highlight: pygments
+link-citations: yes
+---
+
+**Due:** Monday, November 10, 11:59pm on Canvas
+
+**Submission:** A template file is provided, with a rough outline: [project_part_3_template.qmd](https://sta112-f25.github.io/projects/project_part_3_template.qmd)
+
+Once you have completed the report, submit *both* your 
+rendered HTML file and the Quarto file to Canvas.
+
+# Overview
+
+Over the course of this semester, you will complete a project in which you use the tools we learn in class to investigate a research question of your choosing. You will then write a report that communicates the results of your analysis and draws a conclusion about your research question, and finally present your work to me. 
+
+This project will be broken into several different parts; I will provide feedback on each part.
+
+In this third part, your task is to expand your linear regression model by adding additional explanatory variables.
+
+### Overview of project pieces
+
+* Part 1 (15% of project grade): Select a research question and dataset; use EDA to explore data thoroughly
+* Part 2 (15% of project grade): Fit a simple linear regression model; report and interpret results in context of research question
+* Part 3 (15% of project grade): Add additional explanatory variables to the model; report and interpret results
+* Part 4 (25% of project grade): Compile full analyses into final written document, taking into account feedback from earlier parts
+* Part 5 (30% of project grade): Oral interview to present your results and processes to Dr. Evans
+    * I will be asking questions as you go along the way, just like a client would do who was interested in your results. Be prepared to explain your process and results, and answer questions from me!
+
+# Your task in Part III
+
+Based on your work in the previous parts of the project, fit a linear regression model to address your research question. Your linear regression model should include multiple explanatory variables, so that you can address your research question in the context of other variables which may be related to the response.
+
+Then, use diagnostic plots to assess the model assumptions and check for outliers. Make any additional adjustments to your model based on your diagnostic plots. Interpret the fitted model: discuss relevant coefficients from the model in context of the research question, and report and interpret the model's $R^2$ and $R^2_{adj}$. Finally, perform inference (a hypothesis test and/or confidence interval) to address the research question of interest.
+
+There is no minimum or maximum length required. However, your analysis should be thorough, with your report addressing the research question, and containing all the elements described below.
+
+## Model
+
+First, we need to describe the regression model and give the equation of the fitted model. Write a paragraph in which you:
+
+* Give the population regression model. This should be written using correct notation (remember that $\varepsilon$ is included in the population model, and there are no hats on any variables or parameters). Make sure to use informative variable names (e.g., "Cost" instead of "X"). See "Writing math in Quarto" below.
+* Give the equation of the fitted regression model, using correct notation and informative variable names.
+* Interpret one or more relevant coefficients of the fitted regression model, and explain what they say about the research question.
+* Report and interpret the $R^2$ and $R^2_{adj}$ value
+* The model you report here should be your final model, after making any changes needed to address violations of the regression assumptions. You will verify that the regression assumptions are reasonable for your model in the next section
+
+## Assumption Diagnostics
+
+Next, we want to assess whether the regression assumptions are reasonable for our model. Write 2 - 3 paragraphs in which you:
+
+* Create a residual plot, QQ plot, and studentized residual plot for your fitted model. Make sure to include informative axis labels and captions (with figure numbers) for your figures.
+* Use your residual plot and QQ plot to discuss whether the shape, constant variance, and normality assumptions are reasonable. Refer to your figures by their numbers in the text.
+* Use your studentized residual plot to identify any potential outliers. If there are potential outliers, fit your model with and without the outliers, and report the results for both model fits
+* Discuss the independence and randomness assumptions for the data
+* Assess multicollinearity for your predictors. If multicollinearity is an issue, you should make any appropriate changes to your model.
+
+
+## Inference
+
+Finally, we want to use our fitted regression model to address the research question. Write 2 - 3 paragraphs in which you:
+
+* Translate the research question into null and alternative hypotheses about one or more model parameters. Write these hypotheses using correct notation.
+* Calculate a test statistics and p-value for your hypotheses.
+* Use the p-value to make a conclusion about the research question.
+* If your research question / hypothesis test primarily focuses on a single parameter in the model, also report and interpret a confidence interval for that parameter of interest
+
+## Sources
+
+Provide information on any sources you have used outside the course materials.
+
+* Cite any articles you have referenced
+* Provide links to any websites you have used for code help
+* If generative AI (Chat GPT, Gemini, etc.) was used to help with any part of the assignment, summarize
+    * The AI tool used
+    * The prompts you used
+    * The help provided by the tool
+
+
+# Appearance and style
+
+### Writing
+
+The report should be written like an article or research paper: in full sentences and paragraphs, with headings for each section. You should not write your report with question numbers or as a list of bullet points. Scientific articles are generally written in third person, though "we" can also be acceptable ("we can see from Figure 1...") in some disciplines.
+
+### Code
+
+As with previous assignments, you will write the document in Quarto. However, in full reports, the only output that should be visible from code chunks are figures and tables. If a code chunk does not produce a figure or table, you can hide it from the knitted document with `include=F`:
+
+````
+```{r, include=F}`r ''`
+
+```
+````
+
+If a code chunk produces a figure or table, only the figure or table should be visible in the knitted document. You can hide the chunk but display the output with `echo=F, message=F, warning=F`:
+
+````
+```{r, echo=F, message=F, warning=F}`r ''`
+
+```
+````
+
+### Figures
+
+Figures should have labeled axes, and should be clear and easy to read. Figures should also be captioned and numbered; to caption a figure, use `fig.cap = "..."` in the chunk options. For example (scroll to the right on the code to see it all),
+
+````
+```{r, echo=F, message=F, warning=F, fig.cap="Figure 1: Bill depth vs. bill length for penguins near Palmer Station, Antarctica."}`r ''`
+penguins |>
+  ggplot(aes(x = bill_length_mm, 
+             y = bill_depth_mm)) +
+  geom_point() +
+  labs(x = "Bill length (mm)",
+       y = "Bill depth (mm)") +
+  theme_bw()
+```
+````
+
+is displayed as
+
+```{r include=F}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+```{r, echo=F, message=F, warning=F, fig.cap="Figure 1: Bill depth vs. bill length for penguins near Palmer Station, Antarctica."}
+penguins |>
+  ggplot(aes(x = bill_length_mm, 
+             y = bill_depth_mm)) +
+  geom_point() +
+  labs(x = "Bill length (mm)",
+       y = "Bill depth (mm)") +
+  theme_bw()
+```
+
+Captions should provide enough information to understand what is being plotted, but interpretation can be left to the main text. Refer to figures by their number in the text. Make sure that any figures you include are discussed in the text.
+
+### Writing math in Quarto documents
+
+Doing things like writing down models often involve parameters. Parameters in statistics are generally represented as Greek letters. How can we write Greek letters and other mathematical notation in our Markdown file so they show up when we knit?
+
+If you want to write mathematical notation, we need to tell Markdown, “Hey, we’re going to make a math symbol!” To do that, you use dollar signs. For instance, to make $\widehat{\beta}_1$, you simply put `$\widehathat{\beta}_1$` into the white space (not a chunk) in your Markdown.
+
+Here are some examples of writing math, which you can adapt:
+
+| Math | Code |
+| --- | --- |
+| $Y = \beta_0 + \beta_1 X + \varepsilon$ | `$Y = \beta_0 + \beta_1 X + \varepsilon$` |
+| $\widehat{Y} = -2.2 + 3.7 X$ | `$\widehat{Y} = -2.2 + 3.7 X$` |
+
+# Checklist
+
+* Change name in Quarto YAML
+* Four sections: Model, Diagnostics, Inference, and Sources (see descriptions above for requirements)
+* Writing:
+  * Each section written as a paragraph, with full sentences
+  * No bullet points or lists
+  * Math equations are written nicely, with correct notation (see "Writing math in Quarto")
+* Code:
+  * Code is included in the Quarto document, but *not* displayed in the rendered HTML
+  * The only R output shown in the report is figures and tables
+* Figures:
+  * Include meaningful caption and axis labels (see above for details on including a caption)
+  * Each figure included in the report is discussed in your writing, and referred to by its figure number
+* Submission:
+  * Submit *both* the rendered HMTL and the .qmd file to Canvas
+  * Deadline is Monday, November 10 at 11:59pm
