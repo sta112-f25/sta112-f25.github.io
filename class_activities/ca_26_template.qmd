@@ -1,0 +1,25 @@
+---
+---
+---
+title: "Class activity"
+author: "Your Name"
+format: 
+  html:
+    embed-resources: true
+editor: source
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+team_data <- read_csv("https://sta112-f25.github.io/homework/team_data.csv")
+```
+
+### Exercise 1
+
+```{r}
+
+```
+
+

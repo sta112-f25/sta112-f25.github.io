@@ -1,0 +1,44 @@
+---
+title: "Class activity: Regression with a categorical predictor"
+format: html
+editor: source
+---
+
+\vspace{-2.5cm}
+
+**Instructions:** 
+
+* Work individually or with a neighbor to answer the following questions 
+* To get started, download the [class activity template](https://sta112-f25.github.io/class_activities/ca_26_template.qmd) file
+* When you are finished, render the file as an HTML and submit the HTML to Canvas (let me know if you encounter any problems)
+
+In this class activity, you will continue working with the data from HW 6. Recall that researchers collected data on 74 groups of MBA students at Columbia University. Each group had 3--6 members, and was tasked with completing a week-long project on maximizing financial performance of a fictional blood-testing laboratory. The data here represents a subset of the data made available by the researchers. Each row in the data represents one group, with the following information:
+
+* *performance*: the final performance of the group in the project
+* *size*: the number of group members (between 3 and 6)
+* *females*: the number of female group members
+* *diversity*: a measure of group diversity that summarizes information on the gender, ethnicity, and country of origin for the group members. Takes on values between 0 and 1 (in this data, the values range from 0.25 to 0.65). Higher diversity scores mean the group is more diverse.
+* *testosterone*: the average testosterone levels (in pg/mL) for the group members
+
+To load the data, run
+
+```r
+team_data <- read_csv("https://sta112-f25.github.io/homework/team_data.csv")
+```
+
+The researchers hypothesize that increased group diversity is positively associated with performance when group testosterone levels are low, but increased diversity is negatively associated with performance when testosterone levels are high.
+
+To investigate their hypothesis, the researchers are using the model 
+
+\begin{align*}
+\text{performance} &= \beta_0 + \beta_1 \text{size} + \beta_2 \text{females} + \beta_3 \text{diversity} + \beta_4 \text{testosterone} \\ & \hspace{3cm} + \beta_5 \text{diversity} \cdot \text{testosterone} + \varepsilon
+\end{align*}
+
+
+
+## Questions
+
+1. Carry out a hypothesis test and construct a confidence interval that helps the researchers investigate their hypothesis. Interpret your results in the context of the original research question.
+
+
+

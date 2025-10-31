@@ -18,6 +18,7 @@ October 29
 
 October 31
 : Hypothesis tests and confidence intervals
+  : [Slides](https://sta112-f25.github.io/slides/lecture_26.pdf), [activity 1](https://sta112-f25.github.io/class_activities/ca_25_handout_2.pdf), [activity 2](https://sta112-f25.github.io/class_activities/ca_26.html)
 
 : Reading for Monday's class
   : Textbok 3.5
