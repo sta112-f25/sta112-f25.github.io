@@ -1,5 +1,5 @@
 ---
-title: "Class activity: Regression with a categorical predictor"
+title: "Class activity"
 format: html
 editor: source
 ---
