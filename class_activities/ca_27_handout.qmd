@@ -1,0 +1,59 @@
+---
+title: "Activity: thinking about data"
+format: pdf
+editor: source
+---
+
+\vspace{-2.5cm}
+
+
+In this class activity, you will continue thinking about the data from homework 6.
+
+**Important:** The purpose of the research study described here (and the associated assignments and class activities) is not to claim that some group compositions inherently work better than others -- that would be a prescriptivist approach. Rather, the researchers are interested in *describing* how people interact. This is a purely observational study designed to understand what interactions and group dynamics look like in practice.
+
+\vspace{1cm}
+
+Recall that researchers collected data on 74 groups of MBA students at Columbia University. Each group had 3--6 members, and was tasked with completing a week-long project on maximizing financial performance of a fictional blood-testing laboratory. The data here represents a subset of the data made available by the researchers. Each row in the data represents one group, with the following information:
+
+* *performance*: the final performance of the group in the project
+* *size*: the number of group members (between 3 and 6)
+* *females*: the number of female group members
+* *diversity*: a measure of group diversity that summarizes information on the gender, ethnicity, and country of origin for the group members. Takes on values between 0 and 1 (in this data, the values range from 0.25 to 0.65). Higher diversity scores mean the group is more diverse.
+* *testosterone*: the average testosterone levels (in pg/mL) for the group members
+
+## Data collection
+
+While the data reported here are at the group level, the researchers first had to collect data on each student, before aggregating for each group. The student-level data contains information on 370 participants total, and records their age, gender, ethnicity, country of origin, and testosterone levels. 
+
+* Testosterone levels were collected one week before the group
+task, using a saliva sample from each participant, and were
+measured in pg/mL
+* For gender, only "male" and "female" appear in the dataset; "other" was an option but not selected by any respondents
+* For ethnicity, the observed responses in the data include “Asian,” “Black,” “Hispanic,” “Other,” “South Asian,” “South East Asian,” and “White”; it is not clear if other options were available to respondents
+
+## Discussion questions
+
+Consider each of the following discussion questions with your neighbor. You do not need to write anything down here, just talk through your thoughts.
+
+1. Why do you think I only shared the group-level data with you, rather than the student-level data?
+
+2. Several of the group-level variables involve aggregating information across students in a group. For example, averaging testosterone values, and counting the number of female students in the group. Group diversity, however, seems harder to measure. How might you construct a measure for diversity, using the available information?
+
+3. Below are demographic characteristics for two of the groups in the data. Which group appears more homogeneous? 
+
+| Team ID | Age | Gender | Ethnicity   | Country     |
+|---------|-----|--------|-------------|-------------|
+| 5       | 29  | Female | White       | USA         |
+|         | 27  | Male   | White       | Netherlands |
+|         | 28  | Male   | Hispanic    | Mexico      |
+|         | 24  | Female | South Asian | India       |
+| | | | |
+| 65      | 26  | Male   | Asian       | Korea       |
+|         | 27  | Male   | White       | USA         |
+|         | 27  | Female | White       | USA         |
+|         | 26  | Female | White       | USA         |
+
+
+
+
+

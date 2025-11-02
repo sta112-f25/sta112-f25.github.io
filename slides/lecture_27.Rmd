@@ -1,0 +1,85 @@
+---
+title: Data and regression
+output:
+  xaringan::moon_reader:
+    css: "lab-slides.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### Last time: class activity
+
+\begin{align*}
+\text{performance} &= \beta_0 + \beta_1 \text{size} + \beta_2 \text{females} + \beta_3 \text{diversity} + \beta_4 \text{testosterone} \\ & \hspace{3cm} + \beta_5 \text{diversity} \cdot \text{testosterone} + \varepsilon
+\end{align*}
+
+.large[
+The researchers hypothesize that increased group diversity is positively associated with performance when group testosterone levels are low, but increased diversity is negatively associated with performance when testosterone levels are high.
+
+.question[
+What parameter are we interested in for statistical inference?
+]
+]
+
+---
+
+### Last time: class activity
+
+```
+                       Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            -8.99931    1.94474  -4.628 1.71e-05 ***
+size                    0.27770    0.16009   1.735   0.0873 .  
+females                -0.34429    0.20501  -1.679   0.0977 .  
+diversity              16.12690    3.72741   4.327 5.08e-05 ***
+testosterone            0.07564    0.01633   4.633 1.68e-05 ***
+diversity:testosterone -0.14796    0.03221  -4.594 1.94e-05 ***
+```
+
+```{r, include=F}
+library(tidyverse)
+
+team_data <- read_csv("https://sta112-f25.github.io/homework/team_data.csv")
+
+performance_lm_interaction <- lm(performance ~ size + females + 
+                       diversity*testosterone, 
+                     data = team_data)
+summary(performance_lm_interaction)
+```
+
+---
+
+### Activity: thinking about data
+
+.large[
+Work on the activity (handout).
+]
+
+---
+
+### Activity
+
+.large[
+Consider dividing a group into two subgroups. *One* possible measure of group homogeneity is
+
+$$\text{Homogeneity} = \dfrac{\sum \limits_{j=1}^p \sum \limits_{k=1}^2 m_k (\overline{x}_{\cdot j k} - \overline{x}_{\cdot j \cdot})^2}{\sum \limits_{j=1}^p \sum \limits_{k=1}^2 \sum \limits_{i=1}^{m_k} (x_{ijk} - \overline{x}_{\cdot j \cdot})^2}$$
+]
+
+---
+
+### Activity: thinking about data
+
+.large[
+Work on the class activity (handout).
+]
+
+---
+
+### Activity
+
+![](nuclear_reactor_costs.png)
+
