@@ -12,6 +12,12 @@ editor_options:
   chunk_output_type: console
 ---
 
+### Activity
+
+![](nuclear_reactor_costs.png)
+
+---
+
 ### Data
 
 .large[
