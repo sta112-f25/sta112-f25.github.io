@@ -152,13 +152,76 @@ window.Quarto = {
 <li><span class="math inline">\(R_{adj}^2 = \dfrac{\frac{1}{p-1}  \sum \limits_{i=1}^n (y_i - \widehat{y}_i)^2}{ \frac{1}{n-1} \sum \limits_{i=1}^n (y_i - \overline{y})^2}\)</span></li>
 <li><span class="math inline">\(R_{adj}^2 = 1 - \dfrac{\frac{1}{p-1}  \sum \limits_{i=1}^n (y_i - \widehat{y}_i)^2}{ \frac{1}{n-p} \sum \limits_{i=1}^n (y_i - \overline{y})^2}\)</span></li>
 </ol></li>
+<li>How are the <span class="math inline">\(F\)</span> and <span class="math inline">\(t\)</span> distributions related?
+<ol type="a">
+<li>If <span class="math inline">\(t \sim t_d\)</span>, then <span class="math inline">\(t^2 \sim F_{d, 1}\)</span></li>
+<li>If <span class="math inline">\(t \sim t_d\)</span>, then <span class="math inline">\(t^2 \sim F_{1, d}\)</span></li>
+<li>If <span class="math inline">\(F \sim F_{1,d}\)</span> then <span class="math inline">\(F^2 \sim t_d\)</span></li>
+<li>If <span class="math inline">\(F \sim F_{d, 1}\)</span> then <span class="math inline">\(F^2 \sim t_d\)</span></li>
+</ol></li>
 </ol>
 </section>
 <section id="short-answer-questions" class="level2">
 <h2 class="anchored" data-anchor-id="short-answer-questions">Short answer questions</h2>
-<ol start="3" type="1">
+<ol start="4" type="1">
 <li><p>Can <span class="math inline">\(R^2\)</span> decrease when additional variables are added to a model? Explain. What about <span class="math inline">\(R^2_{adj}\)</span>?</p></li>
 <li><p>How should we handle potential outliers with a studentized residual <span class="math inline">\(&lt; -3\)</span> or <span class="math inline">\(&gt; 3\)</span>?</p></li>
+<li><p>A multiple regression model has response <span class="math inline">\(Y\)</span> and two quantitative explanatory variables, <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>:</p></li>
+</ol>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \varepsilon\]</span> The sample correlation between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> is <span class="math inline">\(r = 0.6\)</span>. Calculate the variance inflation factors (VIFs) for <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>.</p>
+<ol start="7" type="1">
+<li>A multiple regression model has response <span class="math inline">\(Y\)</span> and three quantitative explanatory variables, <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>:</li>
+</ol>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \varepsilon\]</span></p>
+<p>The variance inflation factor (VIF) for <span class="math inline">\(X_1\)</span> is 4. Calculate the <span class="math inline">\(R^2\)</span> for the regression of <span class="math inline">\(X_1\)</span> on <span class="math inline">\(X_2\)</span> and <span class="math inline">\(X_3\)</span>.</p>
+<ol start="8" type="1">
+<li><p>What is Simpson’s paradox?</p></li>
+<li><p>What are some benefits of including multiple explanatory variables in a regression model?</p></li>
+<li><p>True or False: any hypotheses which can be tested with a nested F-test (comparing full and reduced models) can also be tested with a t-test. Explain your answer.</p></li>
+</ol>
+</section>
+<section id="anova-table-practice" class="level2">
+<h2 class="anchored" data-anchor-id="anova-table-practice">ANOVA table practice</h2>
+<p>The commonly accepted explanation for the extinction of the dinosaurs is a colossal asteroid strike. To support this hypothesis, we can look for iridium, a rare metal which is more common in asteroids, in rock samples. A sudden increase in iridium at some point in time supports the asteroid hypothesis.</p>
+<p>We have data on 28 rock samples, recording the concentration of iridium (in ppb) for each sample, and the type of rock (Limestone or Shale). We use the model</p>
+<p><span class="math display">\[Iridium = \beta_0 + \beta_1 IsShale + \varepsilon\]</span></p>
+<p>We can use an ANOVA table to explore differences between these types of rock. Here is a partial ANOVA table for the model described above:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>df</th>
+<th>SS</th>
+<th>MS</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Model</td>
+<td></td>
+<td>88363</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Residual</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td></td>
+<td>1252331</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol start="11" type="1">
+<li>Fill in the remainder of the ANOVA table.</li>
 </ol>
 </section>
 <section id="example-data-questions" class="level2">
@@ -187,14 +250,14 @@ window.Quarto = {
 <p><span class="math inline">\((1) \hspace{1cm} \widehat{\text{oxygen}} = 161.29 + 0.23 \ \text{mass}\)</span></p>
 <p><span class="math inline">\((2) \hspace{1cm} \widehat{\text{oxygen}} = 143.72 + 53.68 \ \text{IsShip} + 0.05 \ \text{mass}\)</span></p>
 <p><span class="math inline">\((3) \hspace{1cm} \widehat{\text{oxygen}} = 52.06 + 257.38 \ \text{IsShip} + 1.92 \ \text{mass} - 4.05 \ \text{IsShip} \cdot \text{mass}\)</span></p>
-<ol type="1">
+<ol start="12" type="1">
 <li><p>Based on the scatterplot, which of these three models do you think is most appropriate? Explain your reasoning.</p></li>
-<li><p>For each of the <em>other</em> two models, draw a scatterplot that would encourage you to choose that model, instead of the model selected in Question 1.</p></li>
-<li><p>Using the estimated equation for the model you chose in question 1, what is the predicted rate of oxygen consumption for a 40g crab exposed to ocean noise? What about for a 40g crab exposed to ship noise?</p></li>
+<li><p>For each of the <em>other</em> two models, draw a scatterplot that would encourage you to choose that model, instead of the model selected in Question 12.</p></li>
+<li><p>Using the estimated equation for the model you chose in question 12, what is the predicted rate of oxygen consumption for a 40g crab exposed to ocean noise? What about for a 40g crab exposed to ship noise?</p></li>
 <li><p>What is the estimated change in oxygen consumption associated with a 1g increase in Mass, for crabs exposed to ship noise?</p></li>
 <li><p>The researchers want to test whether there is any relationship between ship noise and oxygen consumption, after accounting for mass. Write down a null and alternative hypothesis for this test, in terms of one or more parameters from the model.</p></li>
 <li><p>What test can the researchers use to test their hypotheses? Explain your reasoning, and provide the degrees of freedom.</p></li>
-<li><p>Below are the ANOVA tables for the three fitted models. Use these tables to calculate a test statistic for the hypotheses in Question 5.</p></li>
+<li><p>Below are the ANOVA tables for the three fitted models. Use these tables to calculate a test statistic for the hypotheses in Question 16.</p></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Oxygen <span class="sc">~</span> Mass, <span class="at">data =</span> crabs)</span>
@@ -243,6 +306,43 @@ Residuals  96  26192     273
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<ol start="19" type="1">
+<li>Below is a picture of the distribution used to calculate a p-value with the test statistic in the previous question. Is the observed test statistic <em>usual</em> or <em>unusual</em> under the null hypothesis?</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="exam_2_review_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="more-data-practice" class="level2">
+<h2 class="anchored" data-anchor-id="more-data-practice">More data practice</h2>
+<p>A Saint Olaf College student, undertook a study of the archery scores of students at the college who were enrolled in an archery course. Students taking the course record a score for each day they attend class from the first until the last day. We have the following data for each student in the class:</p>
+<ul>
+<li><code>Attendance</code>: Number of days in class</li>
+<li><code>Day1</code>: Archery score on first day</li>
+<li><code>LastDay</code>: Archery score on last day</li>
+</ul>
+<p>The student fits the following regression model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>m_archery <span class="ot">&lt;-</span> <span class="fu">lm</span>(LastDay <span class="sc">~</span> Day1 <span class="sc">+</span> Attendance, <span class="at">data =</span> ArcheryData)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_archery)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>            Estimate Std. Error 
+(Intercept) 113.1278   174.6178  
+Day1          0.7578     0.2046  
+Attendance   -1.3973     7.9871 
+
+Multiple R-squared:  0.5127,    Adjusted R-squared:  0.4477 </code></pre>
+<ol start="20" type="1">
+<li><p>Interpret each of the coefficients in the fitted model, in context of the data.</p></li>
+<li><p>Interpret the <span class="math inline">\(R^2\)</span> for the model.</p></li>
+<li><p>Calculate and interpret a 97% confidence interval for the change in archery score on the last day associated with a 1-point increase in archery score on the first day, holding attendance fixed. The critical value is <span class="math inline">\(t^* = 2.40\)</span>.</p></li>
+</ol>
 </section>
 
 </main>
