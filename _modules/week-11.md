@@ -14,4 +14,5 @@ November 5
   : [review questions](https://sta112-f25.github.io/class_activities/exam_2_review.html)
 
 November 7
-: Model selection
+: Model diagnostics and multicollinearity
+  : [Slides](https://sta112-f25.github.io/slides/lecture_29.pdf)
