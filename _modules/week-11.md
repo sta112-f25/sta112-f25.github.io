@@ -11,7 +11,7 @@ November 5
   : [Slides](https://sta112-f25.github.io/slides/lecture_28.pdf), [activity](https://sta112-f25.github.io/class_activities/ca_28.html)
   
 : Exam 2 review
-  : [review questions](https://sta112-f25.github.io/class_activities/exam_2_review.html)
+  : [review questions](https://sta112-f25.github.io/class_activities/exam_2_review.html), [review solutions](https://sta112-f25.github.io/class_activities/exam_2_review_solutions.html)
 
 November 7
 : Model diagnostics and multicollinearity

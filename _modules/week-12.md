@@ -3,7 +3,7 @@ title: MLR wrap-up, Exam 2
 ---
 
 November 10
-: MLR wrap-up
+: Project work day
 
 November 12
 : Exam 2 review
