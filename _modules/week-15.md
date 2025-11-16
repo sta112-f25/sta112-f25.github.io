@@ -1,12 +1,12 @@
 ---
-title: Project presentations
+title: Wrap up
 ---
 
 December 1
-: Presentations
+: Logistic regression wrap-up
 
 December 3
-: Presentations
+: Project work time
 
 December 5
-: Presentations
+: Project work time
