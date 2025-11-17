@@ -8,6 +8,9 @@ November 17
 
 : Reading for Wednesday's class
   : Textbook 9.1, 9.2
+  
+: **Project part 4 released**{: .label .label-green }
+  : [Part 4](https://sta112-f25.github.io/projects/project_1_part_4.html)
 
 November 19
 : Logistic regression interpretation
